@@ -8,7 +8,8 @@
  ##filter databfile、sln file##
 *.mdb  
 *.ldb  
-*.sln    
+*.sln 
+   
 ##class file##
 *.com  
 *.class  
