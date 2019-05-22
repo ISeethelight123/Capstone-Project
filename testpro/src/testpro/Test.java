@@ -6,7 +6,7 @@ public interface Test {
 	void m2();
 
 	void m3();
-	void m4();
+	
 
 	
 }
