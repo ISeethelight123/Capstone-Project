@@ -8,6 +8,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<table border="1px">
+		<tr>
+			<td>编号</td>
+			<td>收件人名字</td>
+			<td>收件人电话</td>
+			<td>收件人地址</td>
+			<td>用户编号</td>
+		</tr>
+	<c:forEach items="list" var="">
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</c:forEach>
+	</table>
 </body>
 </html>
