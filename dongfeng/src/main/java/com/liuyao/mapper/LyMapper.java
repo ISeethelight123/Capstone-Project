@@ -1,5 +1,5 @@
 package com.liuyao.mapper;
 
-public class LyMapper {
-
+public interface LyMapper {
+	public void m1();
 }
