@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dt78.mapper.AddresseeMapper">
+  <resultMap id="BaseResultMap" type="com.dt78.entity.Addressee">
+    <id column="recipients_id" jdbcType="INTEGER" property="recipientsId" />
+    <result column="recipients_name" jdbcType="VARCHAR" property="recipientsName" />
+    <result column="recipients_phone" jdbcType="VARCHAR" property="recipientsPhone" />
+    <result column="recipients_address" jdbcType="VARCHAR" property="recipientsAddress" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  
+  
+
+</mapper>
