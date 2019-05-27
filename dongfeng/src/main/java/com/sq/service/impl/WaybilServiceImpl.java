@@ -2,13 +2,16 @@ package com.sq.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sq.mapper.WaybilMapper;
 import com.sq.pojo.Waybil;
 import com.sq.service.WaybilService;
-
+@Service
 public class WaybilServiceImpl implements WaybilService {
 
-	
+	@Autowired
 	WaybilMapper watbilMapper;
 	
 	

@@ -2,13 +2,16 @@ package com.sq.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sq.mapper.LineMapper;
 import com.sq.pojo.Line;
 import com.sq.service.LineService;
-
+@Service
 public class LineServiceImpl implements LineService {
 
-	
+	@Autowired
 	LineMapper lineMapper;
 	
 	public void addLine(Line line) {

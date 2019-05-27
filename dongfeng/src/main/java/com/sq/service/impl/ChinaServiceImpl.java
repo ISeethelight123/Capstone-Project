@@ -1,12 +1,15 @@
 package com.sq.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sq.mapper.ChinaMapper;
 import com.sq.pojo.China;
 import com.sq.service.ChinaService;
-
+@Service
 public class ChinaServiceImpl implements ChinaService {
 	
-	
+	@Autowired
 	ChinaMapper chinaMapper;
 
 	/**

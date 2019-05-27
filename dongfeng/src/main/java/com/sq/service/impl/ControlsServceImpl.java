@@ -2,13 +2,16 @@ package com.sq.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sq.mapper.ControlsMapper;
 import com.sq.pojo.Controls;
 import com.sq.service.ControlsService;
-
+@Service
 public class ControlsServceImpl implements ControlsService {
 	
-	
+	@Autowired
 	ControlsMapper controlsMapper;
 
 	/**

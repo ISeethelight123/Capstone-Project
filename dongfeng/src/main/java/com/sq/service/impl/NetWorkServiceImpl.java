@@ -2,13 +2,16 @@ package com.sq.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.sq.mapper.NetWorkMapper;
 import com.sq.pojo.NetWork;
 import com.sq.service.NetWorkService;
-
+@Service
 public class NetWorkServiceImpl implements NetWorkService {
 
-	
+	@Autowired
 	NetWorkMapper netWorkMapper;
 	
 	public void addNetWork(NetWork network) {
