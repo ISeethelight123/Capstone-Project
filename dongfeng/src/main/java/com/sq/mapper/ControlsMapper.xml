@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sq.mapper.ControlsMapper">
+	<resultMap type="com.sq.pojo.Controls" id="controlsMap">
+		<result property="controlId" column="control_id" />
+		<result property="controlCarid" column="control_carid" />
+		<result property="controlLineid" column="control_lineid" />
+		<result property="controlDriverid" column="control_driverid" />
+		<result property="controlWaybilid" column="control_waybilid" />
+		<result property="controlStarttime" column="control_starttime" />
+		<result property="controlEndtime" column="control_endtime" />
+		<result property="temp1" column="temp1" />
+		<result property="temp2" column="temp2" />
+		<result property="temp3" column="temp3" />
+	</resultMap>
+	
+	<!-- 增加运单 -->
+	<insert id="addControls" parameterType="com.sq.pojo.Controls">
+		INSERT INTO controls (
+		  control_lineid,
+		  control_driverid,
+		  control_waybilid,
+		  control_starttime,
+		  control_endtime,
+		)
+		VALUES
+		  (
+		    #{controlLineid},
+		    #{controlDriverid},
+		    #{controlWaybilid},
+		    #{controlStarttime},
+		    #{controlEndtime},
+		  )
+	</insert>
+	
+	<!-- 删除运单 -->
+	<delete id="deleteControlsById" parameterType="java.lang.Integer">
+		delete
+		from
+		  controls
+		where control_id = #{value}
+	</delete>
+	
+	<!-- 批量删除运单 -->
+	<delete id="deleteControlsMassById" >
+		delete
+		from
+		  controls
+		where control_id in
+		<foreach collection="array" item="controlId" open="(" close=")" separator=",">
+			#{controlId}
+		</foreach>
+	</delete>
+	
+	<!-- 修改运单 -->
+	<update id="updateControls" parameterType="com.sq.pojo.Controls">
+		UPDATE
+		  controls
+		SET
+		  control_carid = #{controlCarid},
+		  control_lineid = #{controlLineid},
+		  control_driverid = #{controlDriverid},
+		  control_waybilid = #{controlWaybilid},
+		  control_starttime = #{controlStarttime},
+		  control_endtime = #{controlEndtime}
+		WHERE control_id = #{controlId};
+	</update>
+
+	<!-- 查询单条运单by controlId -->
+	<select id="selectControlsOneByControlsId" parameterType="java.lang.Integer" resultMap="controlsMap">
+		select
+		  control_id,
+		  control_carid,
+		  control_lineid,
+		  control_driverid,
+		  control_waybilid,
+		  control_starttime,
+		  control_endtime
+		from
+		  controls
+		where control_id = #{value}
+	</select>
+
+	<!-- 查询所有运单 -->
+	<select id="selectControlsAll" resultMap="controlsMap">
+		SELECT
+		  control_id,
+		  control_carid,
+		  control_lineid,
+		  control_driverid,
+		  control_waybilid,
+		  control_starttime,
+		  control_endtime 
+		FROM
+		  controls
+	</select>
+
+	<!-- 条件查询 -->
+	<select id="selectControlsChoose" resultMap="controlsMap" parameterType="com.sq.pojo.Controls">
+		SELECT
+		  control_id,
+		  control_carid,
+		  control_lineid,
+		  control_driverid,
+		  control_waybilid,
+		  control_starttime,
+		  control_endtime 
+		FROM
+		  controls
+		<where>
+			<choose>
+				<when test="controlId != 0">
+					control_id = #{controlId}
+				</when>
+				<when test="controlCarid != 0">
+					control_carid = #{controlCarid}
+				</when>
+				<when test="controlLineid != 0">
+					control_lineid = #{controlLineid}
+				</when>
+				<when test="controlDriverid != 0">
+					control_driverid = #{controlDriverid}
+				</when>
+				<when test="controlWaybilid != 0">
+					control_waybilid = #{controlWaybilid}
+				</when>
+				<when test="controlStarttime != null ">
+					control_starttime = #{controlStarttime}
+				</when>
+				<when test="controlEndtime">
+					control_endtime = #{controlEndtime}
+				</when>
+				<otherwise>
+					1=1
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+	
+
+
+
+
+
+
+
+
+</mapper>

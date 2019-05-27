@@ -1,14 +1,10 @@
-package com.sq.mapper;
+package com.sq.service;
 
 import java.util.List;
 
 import com.sq.pojo.Controls;
-/**
- *  运单接口类
- * @author sunqi
- *
- */
-public interface ControlsMapper {
+
+public interface ControlsService {
 
 	/**
 	 * 运单增加

@@ -1,10 +1,10 @@
-package com.sq.mapper;
+package com.sq.service;
 
 import java.util.List;
 
 import com.sq.pojo.Line;
 
-public interface LineMapper {
+public interface LineService {
 
 	/**
 	 * 路线增加

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sq.mapper.ChinaMapper">
+	<resultMap id="chinaMap" type="com.sq.pojo.China">
+		<result property="id" column="Id" />
+		<result property="name" column="Name" />
+		<result property="pid" column="Pid" />
+	</resultMap>
+	<!-- 查询市区 -->
+	<select id="selectcitybyid" parameterType="java.lang.Integer" resultMap="chinaMap">
+		SELECT
+		  Id,
+		  NAME,
+		  Pid
+		FROM
+		  china
+		where 
+		  id = #{value}
+	</select>
+
+	<!-- 查询省区 -->
+	<select id="selectprovincebypid" parameterType="java.lang.Integer" resultMap="chinaMap">
+		SELECT
+		  NAME
+		FROM
+		  china
+		where
+		  pid = #{value}
+	</select>
+
+
+</mapper>

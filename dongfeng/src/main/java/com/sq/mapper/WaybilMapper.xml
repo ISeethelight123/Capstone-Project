@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sq.mapper.WaybilMapper">
+	<resultMap id="waybilMap" type="com.sq.pojo.Waybil" >
+		<result property="waybilId" column="waybil_id" />
+		<result property="waybilOrderid" column="waybil_orderid" />
+		<result property="waybilOid" column="waybil_oid" />
+	</resultMap>
+	
+	<!-- 增加运单 -->
+	<insert id="addWaybil" parameterType="com.sq.pojo.Waybil">
+		INSERT INTO waybil (
+		    waybil_id,
+		    waybil_orderid
+		)
+		VALUES
+		   (
+		     #{waybilId},
+		     #{waybilOrderid}
+		   )
+	</insert>
+
+	<!-- 删除运单 根据waybil_oid -->
+	<delete id="deleteWaybilByWaybilOid" parameterType="java.lang.Integer">
+		DELETE
+		FROM
+		  waybil
+		WHERE waybil_oid = #{value}
+	</delete>
+
+	<!-- 删除运单 根据waybil_id -->
+	<delete id="deleteWaybilByWaybilId" parameterType="java.lang.Integer">
+		DELETE
+		FROM
+		  waybil
+		WHERE waybil_id = #{value}
+	</delete>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteWaybilMassById">
+		DELETE
+		FROM
+		  waybil
+		WHERE waybil_id in
+		<foreach collection="array" item="oid" open="(" close=")" separator=",">
+			#{oid}
+		</foreach>
+	</delete>
+
+	<!-- 运单修改 -->
+	<update id="updateWaybil" parameterType="com.sq.pojo.Waybil">
+		UPDATE
+		  waybil
+		SET
+		  waybil_id = #{waybilId},
+		  waybil_orderid = #{waybilOrderid},
+		  waybil_oid = #{waybilOid}
+		WHERE waybil_oid = #{waybilOid}
+	</update>
+
+	<!-- 运单查询(全部) -->
+	<select id="selectWaybilAll" resultMap="waybilMap">
+		SELECT
+		  waybil_id,
+		  waybil_orderid,
+		  waybil_oid
+		FROM
+		  waybil
+	</select>
+
+	<!-- 运单查询(单个运单)by waybil_id  -->
+	<select id="selectWaybilOneById" parameterType="java.lang.Integer" resultMap="waybilMap">
+		SELECT
+		  waybil_id,
+		  waybil_orderid,
+		  waybil_oid
+		FROM
+		  waybil
+		WHERE 
+		  waybil_id = #{value}
+	</select>
+
+	<!-- 运单查询(条件查询) -->
+	<select id="selectWaybilChoose" parameterType="com.sq.pojo.Waybil" resultMap="waybilMap">
+		SELECT
+		  waybil_id,
+		  waybil_orderid,
+		  waybil_oid
+		FROM
+		  waybil
+		<where>
+		<choose>
+			<when test="waybil_id != 0">
+				and waybil_id = #{waybilId}
+			</when>
+			<when test="waybil_orderid != 0">
+				and waybil_orderid = #{waybilOrderid}
+			</when>
+			<otherwise>
+				1=1
+			</otherwise>
+		</choose>
+		</where>
+	</select>
+
+
+
+
+
+</mapper>

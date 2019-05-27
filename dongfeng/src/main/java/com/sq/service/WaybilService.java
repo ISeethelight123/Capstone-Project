@@ -1,11 +1,11 @@
-package com.sq.mapper;
+package com.sq.service;
 
 import java.util.List;
 
 import com.sq.pojo.Waybil;
 
-public interface WaybilMapper {
-	
+public interface WaybilService {
+
 	/**
 	 * 运单增加
 	 */
@@ -41,6 +41,8 @@ public interface WaybilMapper {
 	 * 运单查询(条件查询)
 	 */
 	List<Waybil> selectWaybilChoose(Waybil waybil);
+	
+	
 	
 	
 }

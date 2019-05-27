@@ -2,7 +2,7 @@ package com.sq.pojo;
 
 import java.util.Date;
 
-public class ControlsPojo {
+public class Controls {
 
 	Integer controlId;
 	Integer controlCarid;
@@ -14,6 +14,8 @@ public class ControlsPojo {
 	String temp1;
 	String temp2;
 	String temp3;
+	
+	
 	public Integer getControlId() {
 		return controlId;
 	}

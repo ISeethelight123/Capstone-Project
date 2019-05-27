@@ -1,6 +1,6 @@
 package com.sq.pojo;
 
-public class LinePojo {
+public class Line {
 
 	Integer lineId;
 	String lineStartpoint;
@@ -9,6 +9,7 @@ public class LinePojo {
 	String lineTemp1;
 	String lineTemp2;
 	String lineTemp3;
+	
 	
 	public Integer getLineId() {
 		return lineId;

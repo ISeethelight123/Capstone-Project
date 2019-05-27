@@ -1,16 +1,17 @@
 package com.sq.pojo;
 
-public class WaybilPojo {
+public class Waybil {
 
-	Integer waybilOutWarehouseid;
+	Integer waybilId;
 	Integer waybilOrderid;
 	Integer waybilOid;
 	
-	public Integer getWaybilOutWarehouseid() {
-		return waybilOutWarehouseid;
+	
+	public Integer getWaybilId() {
+		return waybilId;
 	}
-	public void setWaybilOutWarehouseid(Integer waybilOutWarehouseid) {
-		this.waybilOutWarehouseid = waybilOutWarehouseid;
+	public void setWaybilId(Integer waybilId) {
+		this.waybilId = waybilId;
 	}
 	public Integer getWaybilOrderid() {
 		return waybilOrderid;
@@ -24,11 +25,12 @@ public class WaybilPojo {
 	public void setWaybilOid(Integer waybilOid) {
 		this.waybilOid = waybilOid;
 	}
-	
+	@Override
 	public String toString() {
-		return "Waybil [waybilOutWarehouseid=" + waybilOutWarehouseid + ", waybilOrderid=" + waybilOrderid
-				+ ", waybilOid=" + waybilOid + "]";
+		return "Waybil [waybilId=" + waybilId + ", waybilOrderid=" + waybilOrderid + ", waybilOid=" + waybilOid + "]";
 	}
+	
+	
 	
 	
 	

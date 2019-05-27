@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sq.mapper.CarMapper">
+
+	<resultMap id="CarMap" type="com.sq.pojo.Car">
+		<result property="carId" column="car_id" />
+		<result property="carPlate" column="car_plate" />
+		<result property="carWeight" column="car_weight" />
+		<result property="carType" column="car_type" />
+		<result property="temp1" column="temp1" />
+		<result property="temp2" column="temp2" />
+		<result property="temp3" column="temp3" />
+	</resultMap>
+	
+	<!-- 增加车辆 -->
+	<insert id="addCar" parameterType="com.sq.pojo.Car">
+		INSERT INTO car (
+		  car_plate,
+		  car_weight,
+		  car_type
+		)
+		VALUES
+		  (
+		    #{carPlate},
+		    #{carWeight},
+		    #{carType}
+		  )
+	</insert>
+	
+	<!-- 删除车辆 -->
+	<delete id="deleteCarById" parameterType="java.lang.Integer">
+		DELETE
+		FROM
+		  car
+		WHERE car_id = #{value}
+	</delete>
+	<!-- 批量删除 -->
+	<delete id="deleteCarMassById" >
+		delete from car where car_id in
+		<foreach collection="array" item="carId" open="(" close=")" separator=",">
+			#{carId}
+		</foreach>
+	</delete>
+	
+	<!-- 修改车辆 -->
+	<update id="updateCar" parameterType="com.sq.pojo.Car">
+		UPDATE
+		  car
+		SET
+		  car_plate = #{carPlate},
+		  car_weight = #{carWeight},
+		  car_type = #{carType}
+		WHERE car_id = #{carId}
+	</update>
+	
+	<!-- 查询一个车辆by carId -->
+	<select id="selectCarOneById" parameterType="java.lang.Integer" resultMap="CarMap">
+		SELECT
+		  car_id,
+		  car_plate,
+		  car_weight,
+		  car_type  
+		FROM
+		  car
+		WHERE car_id = #{value}
+	</select>
+	<!-- 查询一个车辆by carPlate -->
+	<select id="selectCarOneByPlate" parameterType="java.lang.String" resultMap="CarMap">
+		SELECT
+		  car_id,
+		  car_plate,
+		  car_weight,
+		  car_type  
+		FROM
+		  car
+		WHERE car_plate = #{value}
+	</select>
+	
+	<!-- 查询所有车辆 -->
+	<select id="selectCarAll"  resultMap="CarMap">
+		SELECT
+		  car_id,
+		  car_plate,
+		  car_weight,
+		  car_type  
+		FROM
+		  car
+	</select>
+
+	<!-- 条件查询 -->
+	<select id="selectCarChoose" resultMap="CarMap" parameterType="com.sq.pojo.Car">
+		SELECT  
+		  car_id,
+		  car_plate,
+		  car_weight,
+		  car_type
+		FROM 
+		  car
+		<where>
+		<choose>
+			<when test="carId != 0">
+				and car_id = #{carId}
+			</when>
+			<when test="carWeight != null">
+				and car_weight = #{carWeight}
+			</when>
+			<when test="carType != null">
+				and car_type = #{carType}
+			</when>
+			<otherwise>
+				1=1
+			</otherwise>
+		</choose>
+		</where>
+	</select>
+	
+	<!-- 模糊查询 -->
+	<select id="selectCarLike" resultMap="CarMap" parameterType="com.sq.pojo.Car">
+		SELECT  
+		  car_id,
+		  car_plate,
+		  car_weight,
+		  car_type
+		FROM 
+		  car
+		<where> 
+		<if test="carWeight != null">
+			and car_weight like concat('%',#{carWeight},'%')
+		</if>
+		<if test="carType != null">
+			and car_type like concat('%',#{carType},'%')
+		</if>
+		</where>
+	</select>
+	
+
+</mapper>

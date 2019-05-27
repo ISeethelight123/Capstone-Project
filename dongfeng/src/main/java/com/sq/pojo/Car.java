@@ -1,6 +1,6 @@
 package com.sq.pojo;
 
-public class CarPojo {
+public class Car {
 
 	Integer carId;
 	String carPlate;

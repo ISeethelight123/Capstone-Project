@@ -1,15 +1,10 @@
-package com.sq.mapper;
+package com.sq.service;
 
 import java.util.List;
 
 import com.sq.pojo.Car;
 
-/**
- *  车辆接口类
- * @author sunqi
- *
- */
-public interface CarMapper {
+public interface CarService {
 
 	/**
 	 * 车辆增加
@@ -47,5 +42,8 @@ public interface CarMapper {
 	 * 车辆查询(模糊查询)
 	 */
 	List<Car> selectCarLike(Car c);
+	
+	
+	
 	
 }
