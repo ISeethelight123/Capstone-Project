@@ -7,9 +7,17 @@
 		<result property="carPlate" column="car_plate" />
 		<result property="carWeight" column="car_weight" />
 		<result property="carType" column="car_type" />
-		<result property="temp1" column="temp1" />
-		<result property="temp2" column="temp2" />
+		<result property="carSize" column="car_size" />
+		<result property="carStatus" column="car_status" />
 		<result property="temp3" column="temp3" />
+		<association property="loads" javaType="com.sq.pojo.CarLoad">
+			<result property="carloadId" column="carloadId" />
+			<result property="carloads" column="carloads" />
+		</association>
+		<association property="types" javaType="com.sq.pojo.CarType">
+			<result property="cartypeId" column="cartypeId" />
+			<result property="cartypes" column="cartypes" />
+		</association>
 	</resultMap>
 	
 	<!-- 增加车辆 -->
@@ -17,13 +25,17 @@
 		INSERT INTO car (
 		  car_plate,
 		  car_weight,
-		  car_type
+		  car_type,
+		  car_size,
+		  car_status
 		)
 		VALUES
 		  (
 		    #{carPlate},
 		    #{carWeight},
-		    #{carType}
+		    #{carType},
+		    #{carSize},
+		    #{carStatus}
 		  )
 	</insert>
 	
@@ -49,7 +61,9 @@
 		SET
 		  car_plate = #{carPlate},
 		  car_weight = #{carWeight},
-		  car_type = #{carType}
+		  car_type = #{carType},
+		  car_size = #{carSize},
+		  car_status = #{carStatus}
 		WHERE car_id = #{carId}
 	</update>
 	
@@ -59,7 +73,9 @@
 		  car_id,
 		  car_plate,
 		  car_weight,
-		  car_type  
+		  car_type,
+		  car_size,
+		  car_status
 		FROM
 		  car
 		WHERE car_id = #{value}
@@ -70,67 +86,68 @@
 		  car_id,
 		  car_plate,
 		  car_weight,
-		  car_type  
+		  car_type,
+		  car_size,
+		  car_status
 		FROM
 		  car
 		WHERE car_plate = #{value}
 	</select>
 	
-	<!-- 查询所有车辆 -->
-	<select id="selectCarAll"  resultMap="CarMap">
+	<!-- 查询所有车辆的记录数 -->
+	<select id="selectCarCountByQueryVo" parameterType="com.sq.pojo.CarQueryVo" resultType="java.lang.Integer">
 		SELECT
-		  car_id,
-		  car_plate,
-		  car_weight,
-		  car_type  
+		  count(1) 
 		FROM
 		  car
-	</select>
-
-	<!-- 条件查询 -->
-	<select id="selectCarChoose" resultMap="CarMap" parameterType="com.sq.pojo.Car">
-		SELECT  
-		  car_id,
-		  car_plate,
-		  car_weight,
-		  car_type
-		FROM 
-		  car
 		<where>
-		<choose>
-			<when test="carId != 0">
-				and car_id = #{carId}
-			</when>
-			<when test="carWeight != null">
+			<if test="carPlate != null and carPlate !=''">
+				and car_plate like "%"#{carPlate}"%"
+			</if>
+			<if test="carWeight != null">
 				and car_weight = #{carWeight}
-			</when>
-			<when test="carType != null">
+			</if>
+			<if test="carType != null">
 				and car_type = #{carType}
-			</when>
-			<otherwise>
-				1=1
-			</otherwise>
-		</choose>
-		</where>
+			</if>
+			<if test="carStatus != null and carStatus != ''">
+				and car_status = #{carStatus}
+			</if>
+		</where> 
 	</select>
 	
+	
 	<!-- 模糊查询 -->
-	<select id="selectCarLike" resultMap="CarMap" parameterType="com.sq.pojo.Car">
+	<select id="selectCarLikeByQueryVo" resultMap="CarMap" parameterType="com.sq.pojo.CarQueryVo">
 		SELECT  
-		  car_id,
-		  car_plate,
-		  car_weight,
-		  car_type
+		  ca.car_id,
+		  ca.car_plate,
+		  ca.car_weight,
+		  ca.car_type,
+		  ca.car_size,
+		  ca.car_status,
+		  cl.carloads,
+		  ct.cartypes
 		FROM 
-		  car
-		<where> 
-		<if test="carWeight != null">
-			and car_weight like concat('%',#{carWeight},'%')
-		</if>
-		<if test="carType != null">
-			and car_type like concat('%',#{carType},'%')
-		</if>
+		  car ca,carload cl,cartype ct
+		<where>
+			<if test="1==1">
+				ca.car_weight = cl.carload_id and ca.car_type = ct.cartype_id
+			</if>
+			<if test="carPlate != null and carPlate !=''">
+				and ca.car_plate like "%"#{carPlate}"%"
+			</if>
+			<if test="carWeight != null">
+				and ca.car_weight = #{carWeight}
+			</if>
+			<if test="carType != null">
+				and ca.car_type = #{carType}
+			</if>
+			<if test="carStatus != null and carStatus != ''">
+				and ca.car_status = #{carStatus}
+			</if>
 		</where>
+		limit #{startRow},#{size} 
 	</select>
 	
 

@@ -4,11 +4,13 @@ public class Car {
 
 	Integer carId;
 	String carPlate;
-	String carWeight;
-	String carType;
-	String temp1;
-	String temp2;
+	Integer carWeight;
+	Integer carType;
+	String carSize;
+	String carStatus;
 	String temp3;
+	CarLoad loads;
+	CarType types;
 	
 	public Integer getCarId() {
 		return carId;
@@ -22,29 +24,11 @@ public class Car {
 	public void setCarPlate(String carPlate) {
 		this.carPlate = carPlate;
 	}
-	public String getCarWeight() {
-		return carWeight;
+	public String getCarSize() {
+		return carSize;
 	}
-	public void setCarWeight(String carWeight) {
-		this.carWeight = carWeight;
-	}
-	public String getCarType() {
-		return carType;
-	}
-	public void setCarType(String carType) {
-		this.carType = carType;
-	}
-	public String getTemp1() {
-		return temp1;
-	}
-	public void setTemp1(String temp1) {
-		this.temp1 = temp1;
-	}
-	public String getTemp2() {
-		return temp2;
-	}
-	public void setTemp2(String temp2) {
-		this.temp2 = temp2;
+	public void setCarSize(String carSize) {
+		this.carSize = carSize;
 	}
 	public String getTemp3() {
 		return temp3;
@@ -53,10 +37,46 @@ public class Car {
 		this.temp3 = temp3;
 	}
 	
-	public String toString() {
-		return "CarPojo [carId=" + carId + ", carPlate=" + carPlate + ", carWeight=" + carWeight + ", carType="
-				+ carType + ", temp1=" + temp1 + ", temp2=" + temp2 + ", temp3=" + temp3 + "]";
+	public Integer getCarWeight() {
+		return carWeight;
 	}
+	public void setCarWeight(Integer carWeight) {
+		this.carWeight = carWeight;
+	}
+	public Integer getCarType() {
+		return carType;
+	}
+	public void setCarType(Integer carType) {
+		this.carType = carType;
+	}
+	
+	public String getCarStatus() {
+		return carStatus;
+	}
+	public void setCarStatus(String carStatus) {
+		this.carStatus = carStatus;
+	}
+	
+	public CarLoad getLoads() {
+		return loads;
+	}
+	public void setLoads(CarLoad loads) {
+		this.loads = loads;
+	}
+	public CarType getTypes() {
+		return types;
+	}
+	public void setTypes(CarType types) {
+		this.types = types;
+	}
+	@Override
+	public String toString() {
+		return "Car [carId=" + carId + ", carPlate=" + carPlate + ", carWeight=" + carWeight + ", carType=" + carType
+				+ ", carSize=" + carSize + ", carStatus=" + carStatus + ", temp3=" + temp3 + "]";
+	}
+	
+	
+	
 	
 	
 	

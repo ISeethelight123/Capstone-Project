@@ -2,7 +2,9 @@ package com.sq.service;
 
 import java.util.List;
 
+import com.sq.common.utils.Page;
 import com.sq.pojo.Car;
+import com.sq.pojo.CarQueryVo;
 
 public interface CarService {
 
@@ -22,10 +24,7 @@ public interface CarService {
 	 * 车辆修改
 	 */
 	void updateCar(Car c);
-	/**
-	 * 车辆查询(全部车辆)
-	 */
-	List<Car> selectCarAll();
+	
 	/**
 	 * 车辆查询(单个车辆)
 	 */
@@ -35,13 +34,14 @@ public interface CarService {
 	 */
 	Car selectCarOneByPlate(String carPlate);
 	/**
-	 * 车辆查询(条件查询)
+	 * 车辆查询(全部车辆)的记录数
 	 */
-	List<Car> selectCarChoose(Car c);
+	int selectCarCountByQueryVo(CarQueryVo vo);
+	
 	/**
-	 * 车辆查询(模糊查询)
+	 * 分页车辆查询(模糊查询)
 	 */
-	List<Car> selectCarLike(Car c);
+	Page<Car> selectCarLikeByQueryVo(CarQueryVo vo);
 	
 	
 	

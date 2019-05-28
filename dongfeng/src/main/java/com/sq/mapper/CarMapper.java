@@ -3,6 +3,7 @@ package com.sq.mapper;
 import java.util.List;
 
 import com.sq.pojo.Car;
+import com.sq.pojo.CarQueryVo;
 
 /**
  *  车辆接口类
@@ -27,10 +28,7 @@ public interface CarMapper {
 	 * 车辆修改
 	 */
 	void updateCar(Car c);
-	/**
-	 * 车辆查询(全部车辆)
-	 */
-	List<Car> selectCarAll();
+	
 	/**
 	 * 车辆查询(单个车辆)
 	 */
@@ -39,13 +37,15 @@ public interface CarMapper {
 	 * 车辆查询(单个车辆)
 	 */
 	Car selectCarOneByPlate(String carPlate);
+	
 	/**
-	 * 车辆查询(条件查询)
+	 * 车辆查询(全部车辆)的记录数
 	 */
-	List<Car> selectCarChoose(Car c);
+	int selectCarCountByQueryVo(CarQueryVo vo);
+	
 	/**
-	 * 车辆查询(模糊查询)
+	 * 分页车辆查询(模糊查询)
 	 */
-	List<Car> selectCarLike(Car c);
+	List<Car> selectCarLikeByQueryVo(CarQueryVo vo);
 	
 }
