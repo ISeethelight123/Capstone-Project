@@ -3,7 +3,8 @@ package com.qyqjava.service.impl;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +22,11 @@ import com.qyqjava.service.OrderService;
 @Service
 @Transactional
 public class OrderServiceImpl_qyq implements OrderService {
-	@Autowired
+	@Resource(name = "ordersQYQ")
 	private OrdersMapper ordersMapper;
-	@Autowired
+	@Resource(name = "allocationQYQ")
 	private AllocationMapper allocationMapper;
-	@Autowired
+	@Resource(name = "inwrehouseQYQ")
 	private InwrehouseMapper inwrehouseMapper;
 
 	/*

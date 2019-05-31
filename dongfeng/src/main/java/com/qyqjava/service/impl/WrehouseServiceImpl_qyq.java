@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,11 +20,11 @@ import com.qyqjava.service.WrehouseService_qyq;
 @Service
 @Transactional
 public class WrehouseServiceImpl_qyq implements WrehouseService_qyq {
-	@Autowired
+	@Resource(name = "wrehouseQYQ")
 	private WrehouseMapper wrehouseMapper;
-	@Autowired
+	@Resource(name = "relationQYQ")
 	private RelationMapper relationMapper;
-	@Autowired
+	@Resource(name = "allocationQYQ")
 	private AllocationMapper allocationMapper;
 
 	/*

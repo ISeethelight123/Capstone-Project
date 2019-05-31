@@ -4,7 +4,8 @@ import com.qyqjava.pojo.Orders;
 import com.qyqjava.pojo.OrdersExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Component;
+@Component(value = "orderSQYQ")
 public interface OrdersMapper {
     int countByExample(OrdersExample example);
 
