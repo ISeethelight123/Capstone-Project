@@ -1,18 +1,16 @@
 package com.sq.mapper;
 
+import java.util.List;
+
 import com.sq.pojo.China;
 
 public interface ChinaMapper {
 
-	/**
-	 * 查询市区
-	 */
-	China selectcitybyid(Integer id);
 	
 	/**
-	 * 查询省区
+	 * 查询所有省区
 	 */
-	String selectprovincebypid(Integer pid);
+	List<China> selectprovincebyid();
 	
 	
 }

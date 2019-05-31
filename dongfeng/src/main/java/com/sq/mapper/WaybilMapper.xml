@@ -102,8 +102,21 @@
 		</choose>
 		</where>
 	</select>
-
-
+	<!-- 生成运单号的最小值 -->
+	<select id="selectMaxWaybilId" resultType="java.lang.Integer">
+		SELECT MAX(`waybil_id`) FROM `waybil`
+	</select>
+	<!-- 批量添加 -->
+	<insert id="addWaybilMass">
+		INSERT INTO waybil (
+		  `waybil_id`,
+		  `waybil_orderid`
+		)
+		VALUES
+		<foreach collection="list" item="waybil"  separator=",">
+			(#{waybil.waybilId},#{waybil.waybilOrderid})
+		</foreach> 
+	</insert>
 
 
 

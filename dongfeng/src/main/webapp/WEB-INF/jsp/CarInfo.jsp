@@ -65,11 +65,6 @@
 				<div class="form-group" style="margin-left: 15px;">
 					<label for="exampleInputEmail2">车牌号</label> <input value="${carPlate }"  type="text" name="carPlate" style="width: 150px" class="form-control" id="exampleInputEmail2">
 				</div>
-				<!-- <div class="form-group" style="margin-left: 15px;">
-					<label for="exampleInputEmail2">车载重</label> <input type="text" style="width: 100px" class="form-control" id="exampleInputEmail2">
-				</div> -->
-				
-				
 				<div class="form-group" style="margin-left: 15px;">
 					<label for="exampleInputEmail2">车载重</label> 
 					<select	class="form-control" id="exampleInputEmail2" placeholder="车载重" name="carWeight">
@@ -123,7 +118,7 @@
 						<td>${(row.carStatus == 0)?"使用中":"闲置中" }</td>
 						<td>
 							<button class="btn btn-primary btn-xs" id="deleteCar" onclick="deleteCar(${row.carId})">删除</button>
-							<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick="editCar(${row.carId})">修改</a>
+							<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#carEditDialog" onclick="editCar(${row.carId})">修改</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -137,7 +132,7 @@
 		
 		
 		<!-- 车辆信息编辑对话框 -->
-		<div class="modal fade" id="customerEditDialog" tabindex="-1" role="dialog"
+		<div class="modal fade" id="carEditDialog" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">

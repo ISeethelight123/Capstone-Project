@@ -11,7 +11,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>车辆信息管理</title>
+		<title>调度信息管理</title>
 		<!-- 引入bootstrap的核心文件 -->
 		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
 
@@ -53,8 +53,6 @@
 			top: 50px;
 			left: 1130px;
 		}
-		
-		
 		
 	</style>
 

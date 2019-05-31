@@ -193,7 +193,7 @@
 									<a target="Conframe" href="car/CarInfo">车辆信息管理</a>
 								</li>
 								<li><b class="tip"></b>
-									<a target="Conframe" href="CarInfo.jsp">司机信息管理</a>
+									<a target="Conframe" href="driver/DriverInfo">司机信息管理</a>
 								</li>
 							</ul>
 						</li>
@@ -217,13 +217,13 @@
 							</a>
 							<ul>
 								<li><b class="tip"></b>
-									<a target="Conframe" href="yuangong.html">调度信息查询</a>
+									<a target="Conframe" href="CarController">调度单管理</a>
 								</li>
 								<li><b class="tip"></b>
-									<a target="Conframe" href="kaoqin_list.html">调度单管理</a>
+									<a target="Conframe" href="/waybil/createController">新增调度单</a>
 								</li>
 								<li><b class="tip"></b>
-									<a target="Conframe" href="zhaopin_list.html">新增调度单</a>
+									<a target="Conframe" href="/waybil/waybil">新增运单</a>
 								</li>
 							</ul>
 						</li>

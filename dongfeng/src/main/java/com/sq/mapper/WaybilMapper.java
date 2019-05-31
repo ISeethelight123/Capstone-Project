@@ -43,4 +43,15 @@ public interface WaybilMapper {
 	List<Waybil> selectWaybilChoose(Waybil waybil);
 	
 	
+	/**
+	 * 生成运单号的最大值
+	 */
+	Integer selectMaxWaybilId();
+	
+	/**
+	 * 批量生成运单
+	 */
+	void addWaybilMass(List<Waybil> list);
+	
+	
 }

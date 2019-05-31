@@ -6,26 +6,17 @@
 		<result property="name" column="Name" />
 		<result property="pid" column="Pid" />
 	</resultMap>
-	<!-- 查询市区 -->
-	<select id="selectcitybyid" parameterType="java.lang.Integer" resultMap="chinaMap">
+
+	<!-- 查询省区 -->
+	<select id="selectprovincebyid" resultMap="chinaMap">
 		SELECT
 		  Id,
-		  NAME,
+		  Name,
 		  Pid
 		FROM
 		  china
-		where 
-		  id = #{value}
-	</select>
-
-	<!-- 查询省区 -->
-	<select id="selectprovincebypid" parameterType="java.lang.Integer" resultMap="chinaMap">
-		SELECT
-		  NAME
-		FROM
-		  china
 		where
-		  pid = #{value}
+		  id LIKE '%0000'
 	</select>
 
 

@@ -47,4 +47,14 @@ public class WaybilServiceImpl implements WaybilService {
 		return watbilMapper.selectWaybilChoose(waybil);
 	}
 
+	
+	public Integer selectMaxWaybilId() {
+		return watbilMapper.selectMaxWaybilId();
+	}
+
+	
+	public void addWaybilMass(List<Waybil> list) {
+		watbilMapper.addWaybilMass(list);
+	}
+
 }

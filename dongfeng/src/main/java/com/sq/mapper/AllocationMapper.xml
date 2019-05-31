@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sq.mapper.AllocationMapper">
+	<resultMap id="AllocationMap" type="com.sq.pojo.Allocation">
+		<result property="no" column="no" />
+		<result property="allocationId" column="allocation_id" />
+		<result property="allocationType" column="allocation_type" />
+		<result property="orderId" column="order_id" />
+		<result property="wrehouseId" column="wrehouse_id" />
+		<association property="wrehouse" javaType="com.sq.pojo.Wrehouse">
+			<result property="wrehouseId" column="wrehouse_id" />
+			<result property="wrehouseAddress" column="wrehouse_address" />
+			<result property="wrehouseName" column="wrehouse_name" />
+			<result property="wrehousePhone" column="wrehouse_phone" />
+		</association>
+		<association property="order" javaType="com.sq.pojo.Orders">
+			<result property="orderId" column="order_id" />
+			<result property="orderMailName" column="order_mailName" />
+			<result property="orderMailPhone" column="order_mailPhone" />
+			<result property="orderMailAddress" column="order_mailAddress" />
+			<result property="recipientsId" column="recipients_id" />
+			<result property="orderTime" column="order_time" />
+			<result property="orderWeight" column="order_weight" />
+			<result property="orderType" column="order_type" />
+			<result property="orderMoney" column="order_money" />
+			<result property="orderStaffId" column="order_staffId" />
+			<result property="orderOffer" column="order_offer" />
+			<result property="orderUrgent" column="order_urgent" />
+			<result property="orderNowAddress" column="order_nowAddress" />
+			<result property="orderState" column="order_state" />
+			<association property="recipient" javaType="com.sq.pojo.Recipients">
+				<result property="recipientsId" column="recipients_id" />
+				<result property="recipientsName" column="recipients_name" />
+				<result property="recipientsPhone" column="recipients_phone" />
+				<result property="recipientsAddress" column="recipients_address" />
+				<result property="userId" column="user_id" />
+				<result property="recipientsProvince" column="recipients_province" />
+				<result property="provinceCity" column="province_city" />
+				<result property="provinceRegion" column="province_region" />
+			</association>
+		</association>
+	</resultMap>
+
+	<!-- 查询分页对象 -->
+	<select id="selectAllocationByWrehouseId" parameterType="com.sq.pojo.OrderQueryVo" resultMap="AllocationMap">
+		SELECT
+		  o.`order_id`,
+		  o.`order_mailName`,
+		  o.`order_mailPhone`,
+		  o.`order_mailAddress`,
+		  re.`recipients_province`,
+		  DATE_FORMAT(o.`order_time`,'%Y-%m-%d') 'order_time',
+		  o.`order_weight`,
+		  o.`order_type`,
+		  o.`order_money`,
+		  o.order_state
+		FROM
+		  `allocation` al,
+		  `orders` o,
+		  `recipients` re,
+		  `wrehouse` wr
+		 <where>
+		 	<if test="1==1">
+		 	 	al.`wrehouse_ID` = wr.`Wrehouse_ID`
+			    AND al.`order_ID` = o.`order_id`
+			   	AND o.`recipients_id` = re.`recipients_id`
+		 	</if>
+		 	<if test="wrehouseName != null and wrehouseName != '' ">
+ 				and wr.wrehouse_name = #{wrehouseName}
+		 	</if>
+		 	<if test="recipientsProvince != null and recipientsProvince != '' ">
+		 		and re.recipients_province = #{recipientsProvince}
+		 	</if>
+		 	<if test="orderTime != null and orderTime != '' ">
+		 		and o.order_time = #{orderTime}
+		 	</if>
+		 </where> 
+		 limit #{startRow},#{size} 
+	</select>
+	<!-- 查询符合条件的订单数 -->
+	<select id="selectAllocationCountByWrehouseId" parameterType="com.sq.pojo.OrderQueryVo" resultType="java.lang.Integer">
+		SELECT
+		  count(1)
+		FROM
+		  `allocation` al,
+		  `orders` o,
+		  `recipients` re,
+		  `wrehouse` wr
+		 <where>
+		 	<if test="1==1">
+		 	 	al.`wrehouse_ID` = wr.`Wrehouse_ID`
+			    AND al.`order_ID` = o.`order_id`
+			   	AND o.`recipients_id` = re.`recipients_id`
+		 	</if>
+		 	<if test="wrehouseName != null and wrehouseName != '' ">
+ 				and wr.wrehouse_name = #{wrehouseName}
+		 	</if>
+		 	<if test="recipientsProvince != null and recipientsProvince != '' ">
+		 		and re.recipients_province = #{recipientsProvince}
+		 	</if>
+		 	<if test="orderTime != null and orderTime != '' ">
+		 		and o.order_time = #{orderTime}
+		 	</if>
+		 </where>
+	</select>
+
+
+
+
+</mapper>
