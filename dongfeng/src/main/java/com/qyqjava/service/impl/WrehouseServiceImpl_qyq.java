@@ -107,4 +107,25 @@ public class WrehouseServiceImpl_qyq implements WrehouseService_qyq {
 		}
 
 	}
+
+	/*
+	 * 查询仓库中的订单数量
+	 * 
+	 * @see com.qyqjava.service.WrehouseService_qyq#showOrdersPen()
+	 */
+	public List<Object> showOrdersPen() {
+
+		List<Object> list = allocationMapper.showAllNum();
+		return list;
+	}
+
+	/*
+	 * (non-Javadoc)查询表wrehouse
+	 * 
+	 * @see com.qyqjava.service.WrehouseService_qyq#showWre()
+	 */
+	public List<Wrehouse> showWre() {
+		List<Wrehouse> list = wrehouseMapper.selectByExample(null);
+		return list;
+	}
 }

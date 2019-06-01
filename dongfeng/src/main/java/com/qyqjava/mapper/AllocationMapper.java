@@ -32,4 +32,6 @@ public interface AllocationMapper {
     int updateByPrimaryKey(Allocation record);
     
     int addAllocation(Map<String, Object> map);
+    
+    List<Object> showAllNum();
 }

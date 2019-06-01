@@ -31,5 +31,13 @@ public interface WrehouseService_qyq {
 	 * 删除仓库
 	 */
 	public int deleteWrehouse(String id);
+	/*
+	 * 查询仓库的订单量(按仓库分类)
+	 */
+	public List<Object> showOrdersPen();
+	/*
+	 * 查询仓库的信息（wrehouse)
+	 */
+	public List<Wrehouse> showWre();
 
 }

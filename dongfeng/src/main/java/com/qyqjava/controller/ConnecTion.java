@@ -1,15 +1,20 @@
 package com.qyqjava.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.qyqjava.mapper.AllocationMapper;
 import com.qyqjava.pojo.Inwrehouse;
 import com.qyqjava.pojo.Outwerhouse;
+import com.qyqjava.pojo.Wrehouse;
 import com.qyqjava.service.InwrehouseService;
 import com.qyqjava.service.OutWrehouseService_qyq;
 import com.qyqjava.service.WrehouseService_qyq;
@@ -23,6 +28,8 @@ public class ConnecTion {
 	private InwrehouseService inwrehouseService;
 	@Autowired
 	private OutWrehouseService_qyq outwrehosueService;
+	@Resource(name = "allocationQYQ")
+	private AllocationMapper allocationMapper;
 
 	@RequestMapping("/gomain")
 	public String goMain() {
@@ -63,4 +70,27 @@ public class ConnecTion {
 		return "OutWrehouse";
 	}
 
+	/*
+	 * 显示仓库订单主页 1.查询仓库的名称 2.查询仓库的订单量
+	 */
+	@RequestMapping("/goWrePerent")
+	public String goWrePerent(Model model) {
+		List<String> listx = new ArrayList<>();
+	
+		// 查询仓库名称
+		List<Wrehouse> showWre = WrehouseService.showWre();
+		for (Wrehouse wrehouse : showWre) {
+			listx.add(wrehouse.getWrehouseName());
+		}
+		// 查询仓库的订单数
+		List<Object> listy = new ArrayList<>();
+		List<Object> showAllNum = allocationMapper.showAllNum();
+		for (Object object : showAllNum) {
+			listy.add(object);
+		}
+		
+		model.addAttribute("listx", listx);
+		model.addAttribute("listy", listy);
+		return "WrePerent";
+	}
 }

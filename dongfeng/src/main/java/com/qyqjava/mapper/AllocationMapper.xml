@@ -27,7 +27,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -59,7 +60,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -114,11 +116,14 @@
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.qyqjava.pojo.Allocation">
-		insert into allocation (no, allocation_ID, allocation_type,
+		insert into allocation (no,
+		allocation_ID, allocation_type,
 		order_ID, wrehouse_ID)
-		values (#{no,jdbcType=INTEGER}, #{allocationId,jdbcType=INTEGER},
+		values
+		(#{no,jdbcType=INTEGER}, #{allocationId,jdbcType=INTEGER},
 		#{allocationType,jdbcType=INTEGER},
-		#{orderId,jdbcType=VARCHAR}, #{wrehouseId,jdbcType=INTEGER})
+		#{orderId,jdbcType=VARCHAR},
+		#{wrehouseId,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective"
 		parameterType="com.qyqjava.pojo.Allocation">
@@ -176,7 +181,8 @@
 				allocation_ID = #{record.allocationId,jdbcType=INTEGER},
 			</if>
 			<if test="record.allocationType != null">
-				allocation_type = #{record.allocationType,jdbcType=INTEGER},
+				allocation_type =
+				#{record.allocationType,jdbcType=INTEGER},
 			</if>
 			<if test="record.orderId != null">
 				order_ID = #{record.orderId,jdbcType=VARCHAR},
@@ -192,10 +198,14 @@
 	<update id="updateByExample" parameterType="map">
 		update allocation
 		set no = #{record.no,jdbcType=INTEGER},
-		allocation_ID = #{record.allocationId,jdbcType=INTEGER},
-		allocation_type = #{record.allocationType,jdbcType=INTEGER},
-		order_ID = #{record.orderId,jdbcType=VARCHAR},
-		wrehouse_ID = #{record.wrehouseId,jdbcType=INTEGER}
+		allocation_ID
+		= #{record.allocationId,jdbcType=INTEGER},
+		allocation_type =
+		#{record.allocationType,jdbcType=INTEGER},
+		order_ID =
+		#{record.orderId,jdbcType=VARCHAR},
+		wrehouse_ID =
+		#{record.wrehouseId,jdbcType=INTEGER}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -222,14 +232,28 @@
 	<update id="updateByPrimaryKey"
 		parameterType="com.qyqjava.pojo.Allocation">
 		update allocation
-		set allocation_ID = #{allocationId,jdbcType=INTEGER},
-		allocation_type = #{allocationType,jdbcType=INTEGER},
-		order_ID = #{orderId,jdbcType=VARCHAR},
-		wrehouse_ID = #{wrehouseId,jdbcType=INTEGER}
+		set allocation_ID =
+		#{allocationId,jdbcType=INTEGER},
+		allocation_type =
+		#{allocationType,jdbcType=INTEGER},
+		order_ID =
+		#{orderId,jdbcType=VARCHAR},
+		wrehouse_ID =
+		#{wrehouseId,jdbcType=INTEGER}
 		where no = #{no,jdbcType=INTEGER}
 	</update>
 	<insert id="addAllocation" parameterType="java.util.Map">
-		call PLinset(#{wreid},#{totel})
+		call
+		PLinset(#{wreid},#{totel})
 	</insert>
+
+	<!-- 查询每个仓库的订单量 -->
+	<select id="showAllNum" resultType="Integer">
+		SELECT
+		COUNT(a.allocation_type) FROM (
+		SELECT * FROM allocation WHERE
+		allocation_type = 1)a
+		GROUP BY a.wrehouse_ID
+	</select>
 
 </mapper>
