@@ -191,14 +191,14 @@ ul.nav span {
 							<li><b class="tip"></b> <a target="Conframe"
 								href="zhaopin_list.html">新增调度单</a></li>
 						</ul></li>
-					<li><a href="#">订单管理</a> </a>
+					<li><a href="#">订单管理</a>
 						<ul>
 							<li><b class="tip"></b> <a target="Conframe"
 								href="OrderInfo.html">订单信息管理</a></li>
 							<li><b class="tip"></b> <a target="Conframe"
 								href="InsertOrder.html">新增订单</a></li>
 						</ul></li>
-					<li><a href="#">财务管理</a> </a>
+					<li><a href="#">财务管理</a>
 						<ul>
 							<li><b class="tip"></b> <a target="Conframe"
 								href="/profit/showProfitInfo">财务信息</a></li>

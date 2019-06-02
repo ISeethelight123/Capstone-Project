@@ -2,6 +2,8 @@ package com.qyqjava.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +17,9 @@ import com.qyqjava.service.ProfitService;
 @Service
 @Transactional
 public class ProfitServiceImpl implements ProfitService {
-	@Autowired
+	@Resource(name = "profitMapperQYQ")
 	private ProfitMapper ProfitMapper;
-	@Autowired
+	@Resource(name = "expensesMapperQYQ")
 	private ExpensesMapper expensesMapper;
 
 	/*

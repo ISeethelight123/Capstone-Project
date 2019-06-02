@@ -5,7 +5,8 @@ import com.qyqjava.pojo.ChinaExample;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Component;
+@Component(value="chinaMapperQYQ")
 public interface ChinaMapper {
     int countByExample(ChinaExample example);
 

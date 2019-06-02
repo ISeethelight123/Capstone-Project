@@ -4,7 +4,8 @@ import com.qyqjava.pojo.Expenses;
 import com.qyqjava.pojo.ExpensesExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Component;
+@Component(value = "expensesMapperQYQ")
 public interface ExpensesMapper {
     int countByExample(ExpensesExample example);
 

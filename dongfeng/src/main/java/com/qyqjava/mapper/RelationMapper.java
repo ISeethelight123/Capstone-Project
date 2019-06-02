@@ -4,7 +4,8 @@ import com.qyqjava.pojo.Relation;
 import com.qyqjava.pojo.RelationExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Component;
+@Component(value = "relationMapperQYQ")
 public interface RelationMapper {
     int countByExample(RelationExample example);
 

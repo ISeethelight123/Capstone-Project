@@ -5,7 +5,8 @@ import com.qyqjava.pojo.ProfitExample;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Component;
+@Component(value = "profitMapperQYQ")
 public interface ProfitMapper {
     int countByExample(ProfitExample example);
 

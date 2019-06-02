@@ -4,7 +4,8 @@ import com.qyqjava.pojo.Outwerhouse;
 import com.qyqjava.pojo.OutwerhouseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+import org.springframework.stereotype.Component;
+@Component(value = "outwerhouseMapperQYQ")
 public interface OutwerhouseMapper {
     int countByExample(OutwerhouseExample example);
 
