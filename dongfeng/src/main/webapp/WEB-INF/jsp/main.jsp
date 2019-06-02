@@ -377,9 +377,9 @@ ul.nav span {
 					<li><a href="#">车辆</a>
 						<ul>
 							<li><b class="tip"></b> <a target="Conframe"
-								href="CarInfo.html">车辆信息管理</a></li>
+								href="car/CarInfo">车辆信息管理</a></li>
 							<li><b class="tip"></b> <a target="Conframe"
-								href="CarInfo.html">司机信息管理</a></li>
+								href="driver/DriverInfo">司机信息管理</a></li>
 						</ul></li>
 					<li><a href="#">路线管理</a>
 						<ul>
@@ -393,11 +393,11 @@ ul.nav span {
 					<li><a href="#">调度管理</a>
 						<ul>
 							<li><b class="tip"></b> <a target="Conframe"
-								href="yuangong.html">调度信息查询</a></li>
+								href="Schedule/manageSchedule/manageSchedule">调度信息查询</a></li>
 							<li><b class="tip"></b> <a target="Conframe"
-								href="kaoqin_list.html">调度单管理</a></li>
+								href="Schedule/createSchedule/createSchedule">新增调度单</a></li>
 							<li><b class="tip"></b> <a target="Conframe"
-								href="zhaopin_list.html">新增调度单</a></li>
+								href="waybil/waybil">新增运单</a></li>
 						</ul></li>
 					<li><a href="#">订单管理</a>
 						<ul>
