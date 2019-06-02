@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.mapper.UserMapper">
+
+	<select id="findByUsername" parameterType="String"
+		resultType="com.lty.entity.User">
+		select id,
+		uname,
+		pwd
+		from
+		user where uname=#{uname}
+
+	</select>
+
+	<select id="findPermissionByUserId" parameterType="int"
+		resultType="String">
+
+		SELECT mo.`mname` FROM `user_roles` ur
+		INNER JOIN `userrole`
+		uro ON ur.`id`=uro.`uid`
+		INNER JOIN `modulrole` mr ON
+		mr.`rid`=uro.`rid`
+		INNER JOIN `modul` mo ON mo.`mid`=mr.`mid`
+		WHERE
+		ur.`id`=#{id}
+
+	</select>
+
+	<select id="findAll" resultType="com.lty.entity.User">
+		select
+		*
+		from
+		user
+	</select>
+
+
+	<delete id="deleteJS" parameterType="Integer">
+		delete from user
+		where id=#{id}
+	</delete>
+
+	<insert id="addJS" parameterType="com.lty.mapper.UserMapper">
+		insert into
+		user(name,uname,pwd,ad,position)values(#{name},#{uname},#{pwd},#{ad},#{position})
+	</insert>
+	
+	<select id="findpower" resultType="map">
+		SELECT u.`id` ,u.`name`,u.`position`,us.rid FROM USER u
+		LEFT JOIN `userrole` us ON us.uid = u.`id`
+	</select>
+
+</mapper>

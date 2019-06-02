@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.mapper.StaffMapper">
+	<!-- 查所有 -->
+	<select id="selectall" resultType="com.lty.entity.Staff">
+		select *
+		from
+		staff
+	</select>
+	<!--查员工表一半 -->
+	<select id="selecthalf" resultType="com.lty.entity.Staff">
+		select *
+		from
+		staff
+		where id=
+		#{id}
+	</select>
+	
+	<!-- <insert id="addjs" parameterType="com.lty.entity.Staff">
+		insert into yonghu(user,pwd)values(#{user},#{pwd})
+	</insert> -->
+
+</mapper>
