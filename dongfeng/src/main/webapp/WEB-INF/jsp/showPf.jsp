@@ -26,6 +26,7 @@
 </head>
 <body>
 	<div class="container" style="margin-top: 50px">
+	<h4>收入支出表</h4>
 		<table
 			class="table table-striped table table-bordered table table-hover"
 			style="margin-top: 30px; text-align: center;">
