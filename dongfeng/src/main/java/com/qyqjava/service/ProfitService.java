@@ -31,4 +31,8 @@ public interface ProfitService {
 	 * 删除支出
 	 */
 	public int deleteEX(String no);
+	/*
+	 * 查询所有月份
+	 */
+	public List<Object> showMonth();
 }

@@ -253,9 +253,18 @@
 	<!-- 修改利润 -->
 	<update id="updateprofit">
 		UPDATE profit SET profit = (
-		SELECT SUM(order_money) FROM orders WHERE MONTH(order_time) = '6'
+		SELECT SUM(order_money)
+		FROM orders WHERE MONTH(order_time) = '6'
 		) - (
-		SELECT SUM(expenses_money) FROM expenses WHERE MONTH(expenses_time) = 6
+		SELECT
+		SUM(expenses_money) FROM expenses WHERE MONTH(expenses_time) = 6
 		)
+		WHERE MONTH(MONTH) = 6
 	</update>
+
+	<!-- 查询月份 -->
+	<select id="showMonth" resultType="Object">
+		SELECT MONTH(p.MONTH) FROM
+		profit p GROUP BY MONTH(p.month)
+	</select>
 </mapper>

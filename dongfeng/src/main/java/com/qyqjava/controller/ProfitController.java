@@ -1,5 +1,6 @@
 package com.qyqjava.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,8 +72,36 @@ public class ProfitController {
 	 * 跳转到财务分析界面
 	 */
 	@RequestMapping("profitAssay")
-	public String profitAssay() {
+	public String profitAssay(Model model) {
+		// 查询财务表所有信息
+		List<Profit> profitInfo = profitService.showProfitInfo();
+
+		// 获取所有月份
+		List<Object> monthList = profitService.showMonth();
+
+		// 获取所有的利润
+		List<Long> pList = new ArrayList<>();
+		for (Profit profit : profitInfo) {
+			pList.add(profit.getProfit());
+		}
+		// 获取所有收入
+		List<Long> inList = new ArrayList<>();
+		for (Profit profit : profitInfo) {
+			inList.add(profit.getIncome());
+		}
+		// 获取所有支出
+		List<Long> exList = new ArrayList<>();
+		for (Profit profit : profitInfo) {
+			exList.add(profit.getExpenses());
+		}
+
+		model.addAttribute("pList", pList);
+		model.addAttribute("monthList", monthList);
+		model.addAttribute("inList", inList);
+		model.addAttribute("exList", exList);
+
 		return "ProfitAssisa";
 	}
+
 
 }

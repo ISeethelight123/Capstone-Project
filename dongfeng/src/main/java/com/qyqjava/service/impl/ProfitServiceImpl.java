@@ -78,4 +78,14 @@ public class ProfitServiceImpl implements ProfitService {
 		return i;
 	}
 
+	/*
+	 * (non-Javadoc)查询所有月份
+	 * 
+	 * @see com.qyqjava.service.ProfitService#showMonth()
+	 */
+	public List<Object> showMonth() {
+		List<Object> month = ProfitMapper.showMonth();
+		System.out.println(month);
+		return month;
+	}
 }
