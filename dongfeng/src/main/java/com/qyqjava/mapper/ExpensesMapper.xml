@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qyqjava.mapper.ExpensesMapper" >
+  <resultMap id="BaseResultMap" type="com.qyqjava.pojo.Expenses" >
+    <id column="no" property="no" jdbcType="INTEGER" />
+    <result column="expenses_name" property="expensesName" jdbcType="VARCHAR" />
+    <result column="expenses_money" property="expensesMoney" jdbcType="DECIMAL" />
+    <result column="expenses_time" property="expensesTime" jdbcType="DATE" />
+    <result column="expenses_dsec" property="expensesDsec" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    no, expenses_name, expenses_money, expenses_time, expenses_dsec
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qyqjava.pojo.ExpensesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from expenses
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from expenses
+    where no = #{no,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from expenses
+    where no = #{no,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qyqjava.pojo.ExpensesExample" >
+    delete from expenses
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qyqjava.pojo.Expenses" >
+    insert into expenses (no, expenses_name, expenses_money, 
+      expenses_time, expenses_dsec)
+    values (#{no,jdbcType=INTEGER}, #{expensesName,jdbcType=VARCHAR}, #{expensesMoney,jdbcType=DECIMAL}, 
+      #{expensesTime,jdbcType=DATE}, #{expensesDsec,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qyqjava.pojo.Expenses" >
+    insert into expenses
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="expensesName != null" >
+        expenses_name,
+      </if>
+      <if test="expensesMoney != null" >
+        expenses_money,
+      </if>
+      <if test="expensesTime != null" >
+        expenses_time,
+      </if>
+      <if test="expensesDsec != null" >
+        expenses_dsec,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="no != null" >
+        #{no,jdbcType=INTEGER},
+      </if>
+      <if test="expensesName != null" >
+        #{expensesName,jdbcType=VARCHAR},
+      </if>
+      <if test="expensesMoney != null" >
+        #{expensesMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="expensesTime != null" >
+        #{expensesTime,jdbcType=DATE},
+      </if>
+      <if test="expensesDsec != null" >
+        #{expensesDsec,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qyqjava.pojo.ExpensesExample" resultType="java.lang.Integer" >
+    select count(*) from expenses
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update expenses
+    <set >
+      <if test="record.no != null" >
+        no = #{record.no,jdbcType=INTEGER},
+      </if>
+      <if test="record.expensesName != null" >
+        expenses_name = #{record.expensesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expensesMoney != null" >
+        expenses_money = #{record.expensesMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expensesTime != null" >
+        expenses_time = #{record.expensesTime,jdbcType=DATE},
+      </if>
+      <if test="record.expensesDsec != null" >
+        expenses_dsec = #{record.expensesDsec,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update expenses
+    set no = #{record.no,jdbcType=INTEGER},
+      expenses_name = #{record.expensesName,jdbcType=VARCHAR},
+      expenses_money = #{record.expensesMoney,jdbcType=DECIMAL},
+      expenses_time = #{record.expensesTime,jdbcType=DATE},
+      expenses_dsec = #{record.expensesDsec,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qyqjava.pojo.Expenses" >
+    update expenses
+    <set >
+      <if test="expensesName != null" >
+        expenses_name = #{expensesName,jdbcType=VARCHAR},
+      </if>
+      <if test="expensesMoney != null" >
+        expenses_money = #{expensesMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="expensesTime != null" >
+        expenses_time = #{expensesTime,jdbcType=DATE},
+      </if>
+      <if test="expensesDsec != null" >
+        expenses_dsec = #{expensesDsec,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where no = #{no,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qyqjava.pojo.Expenses" >
+    update expenses
+    set expenses_name = #{expensesName,jdbcType=VARCHAR},
+      expenses_money = #{expensesMoney,jdbcType=DECIMAL},
+      expenses_time = #{expensesTime,jdbcType=DATE},
+      expenses_dsec = #{expensesDsec,jdbcType=VARCHAR}
+    where no = #{no,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qyqjava.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.qyqjava.pojo.Orders" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="order_mailName" property="orderMailname" jdbcType="VARCHAR" />
+    <result column="order_mailPhone" property="orderMailphone" jdbcType="VARCHAR" />
+    <result column="order_mailAddress" property="orderMailaddress" jdbcType="VARCHAR" />
+    <result column="recipients_id" property="recipientsId" jdbcType="INTEGER" />
+    <result column="order_time" property="orderTime" jdbcType="DATE" />
+    <result column="order_weight" property="orderWeight" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+    <result column="order_money" property="orderMoney" jdbcType="VARCHAR" />
+    <result column="order_staffId" property="orderStaffid" jdbcType="INTEGER" />
+    <result column="order_offer" property="orderOffer" jdbcType="VARCHAR" />
+    <result column="order_urgent" property="orderUrgent" jdbcType="VARCHAR" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="order_nowAddress" property="orderNowaddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    order_id, order_mailName, order_mailPhone, order_mailAddress, recipients_id, order_time, 
+    order_weight, order_type, order_money, order_staffId, order_offer, order_urgent, 
+    order_state, order_nowAddress
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qyqjava.pojo.OrdersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qyqjava.pojo.OrdersExample" >
+    delete from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qyqjava.pojo.Orders" >
+    insert into orders (order_id, order_mailName, order_mailPhone, 
+      order_mailAddress, recipients_id, order_time, 
+      order_weight, order_type, order_money, 
+      order_staffId, order_offer, order_urgent, 
+      order_state, order_nowAddress)
+    values (#{orderId,jdbcType=INTEGER}, #{orderMailname,jdbcType=VARCHAR}, #{orderMailphone,jdbcType=VARCHAR}, 
+      #{orderMailaddress,jdbcType=VARCHAR}, #{recipientsId,jdbcType=INTEGER}, #{orderTime,jdbcType=DATE}, 
+      #{orderWeight,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR}, #{orderMoney,jdbcType=VARCHAR}, 
+      #{orderStaffid,jdbcType=INTEGER}, #{orderOffer,jdbcType=VARCHAR}, #{orderUrgent,jdbcType=VARCHAR}, 
+      #{orderState,jdbcType=INTEGER}, #{orderNowaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qyqjava.pojo.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderMailname != null" >
+        order_mailName,
+      </if>
+      <if test="orderMailphone != null" >
+        order_mailPhone,
+      </if>
+      <if test="orderMailaddress != null" >
+        order_mailAddress,
+      </if>
+      <if test="recipientsId != null" >
+        recipients_id,
+      </if>
+      <if test="orderTime != null" >
+        order_time,
+      </if>
+      <if test="orderWeight != null" >
+        order_weight,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="orderMoney != null" >
+        order_money,
+      </if>
+      <if test="orderStaffid != null" >
+        order_staffId,
+      </if>
+      <if test="orderOffer != null" >
+        order_offer,
+      </if>
+      <if test="orderUrgent != null" >
+        order_urgent,
+      </if>
+      <if test="orderState != null" >
+        order_state,
+      </if>
+      <if test="orderNowaddress != null" >
+        order_nowAddress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderMailname != null" >
+        #{orderMailname,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMailphone != null" >
+        #{orderMailphone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMailaddress != null" >
+        #{orderMailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientsId != null" >
+        #{recipientsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=DATE},
+      </if>
+      <if test="orderWeight != null" >
+        #{orderWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMoney != null" >
+        #{orderMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStaffid != null" >
+        #{orderStaffid,jdbcType=INTEGER},
+      </if>
+      <if test="orderOffer != null" >
+        #{orderOffer,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUrgent != null" >
+        #{orderUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="orderNowaddress != null" >
+        #{orderNowaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qyqjava.pojo.OrdersExample" resultType="java.lang.Integer" >
+    select count(*) from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orders
+    <set >
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderMailname != null" >
+        order_mailName = #{record.orderMailname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderMailphone != null" >
+        order_mailPhone = #{record.orderMailphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderMailaddress != null" >
+        order_mailAddress = #{record.orderMailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recipientsId != null" >
+        recipients_id = #{record.recipientsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderTime != null" >
+        order_time = #{record.orderTime,jdbcType=DATE},
+      </if>
+      <if test="record.orderWeight != null" >
+        order_weight = #{record.orderWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderType != null" >
+        order_type = #{record.orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderMoney != null" >
+        order_money = #{record.orderMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderStaffid != null" >
+        order_staffId = #{record.orderStaffid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderOffer != null" >
+        order_offer = #{record.orderOffer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderUrgent != null" >
+        order_urgent = #{record.orderUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderState != null" >
+        order_state = #{record.orderState,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNowaddress != null" >
+        order_nowAddress = #{record.orderNowaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orders
+    set order_id = #{record.orderId,jdbcType=INTEGER},
+      order_mailName = #{record.orderMailname,jdbcType=VARCHAR},
+      order_mailPhone = #{record.orderMailphone,jdbcType=VARCHAR},
+      order_mailAddress = #{record.orderMailaddress,jdbcType=VARCHAR},
+      recipients_id = #{record.recipientsId,jdbcType=INTEGER},
+      order_time = #{record.orderTime,jdbcType=DATE},
+      order_weight = #{record.orderWeight,jdbcType=VARCHAR},
+      order_type = #{record.orderType,jdbcType=VARCHAR},
+      order_money = #{record.orderMoney,jdbcType=VARCHAR},
+      order_staffId = #{record.orderStaffid,jdbcType=INTEGER},
+      order_offer = #{record.orderOffer,jdbcType=VARCHAR},
+      order_urgent = #{record.orderUrgent,jdbcType=VARCHAR},
+      order_state = #{record.orderState,jdbcType=INTEGER},
+      order_nowAddress = #{record.orderNowaddress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qyqjava.pojo.Orders" >
+    update orders
+    <set >
+      <if test="orderMailname != null" >
+        order_mailName = #{orderMailname,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMailphone != null" >
+        order_mailPhone = #{orderMailphone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMailaddress != null" >
+        order_mailAddress = #{orderMailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientsId != null" >
+        recipients_id = #{recipientsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime,jdbcType=DATE},
+      </if>
+      <if test="orderWeight != null" >
+        order_weight = #{orderWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMoney != null" >
+        order_money = #{orderMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStaffid != null" >
+        order_staffId = #{orderStaffid,jdbcType=INTEGER},
+      </if>
+      <if test="orderOffer != null" >
+        order_offer = #{orderOffer,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUrgent != null" >
+        order_urgent = #{orderUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="orderNowaddress != null" >
+        order_nowAddress = #{orderNowaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qyqjava.pojo.Orders" >
+    update orders
+    set order_mailName = #{orderMailname,jdbcType=VARCHAR},
+      order_mailPhone = #{orderMailphone,jdbcType=VARCHAR},
+      order_mailAddress = #{orderMailaddress,jdbcType=VARCHAR},
+      recipients_id = #{recipientsId,jdbcType=INTEGER},
+      order_time = #{orderTime,jdbcType=DATE},
+      order_weight = #{orderWeight,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=VARCHAR},
+      order_money = #{orderMoney,jdbcType=VARCHAR},
+      order_staffId = #{orderStaffid,jdbcType=INTEGER},
+      order_offer = #{orderOffer,jdbcType=VARCHAR},
+      order_urgent = #{orderUrgent,jdbcType=VARCHAR},
+      order_state = #{orderState,jdbcType=INTEGER},
+      order_nowAddress = #{orderNowaddress,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>
