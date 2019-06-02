@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sq.mapper.NetWorkMapper">
+	<resultMap id="netWorkMapper" type="com.sq.pojo.NetWork">
+		<result property="networkId" column="network_id" />
+		<result property="networkAddressid" column="network_addressid" />
+		<result property="networkTemp1" column="network_temp1" />
+		<result property="networkTemp2" column="network_temp2" />
+	</resultMap>
+	
+	<!-- 增加网点 -->
+	<insert id="addNetWork" parameterType="com.sq.pojo.NetWork">
+		INSERT INTO network (
+		  network_addressid
+		)
+		VALUES(
+		   #{networkAddressid} 
+		)
+	</insert>
+	
+	<!-- 删除网点 -->
+	<delete id="deleteNetWorkById" parameterType="java.lang.Integer">
+		DELETE
+		FROM
+		  network
+		WHERE network_id = #{value}
+	</delete>
+	
+	<!-- 网点批量删除 -->
+	<delete id="deleteNetWorkMassById">
+		DELETE
+		FROM
+		  network
+		WHERE network_id in
+		<foreach collection="array" item="networkId" open="(" close=")" separator="," >
+			#{networkId}
+		</foreach>
+	</delete>
+	
+	<!-- 网点修改 -->
+	<update id="updateNetWork" parameterType="com.sq.pojo.NetWork">
+		UPDATE
+		  network
+		SET
+		  network_id = #{networkId},
+		  network_addressid = #{networkAddressid}  
+		WHERE network_id = #{networkId}
+	</update>
+	
+	<!-- 网点查询(单个) -->
+	<select id="selectNetWorkOneById" parameterType="java.lang.Integer" resultMap="netWorkMapper">
+		SELECT
+		  network_id,
+		  network_addressid  
+		FROM
+		  network
+		WHERE 
+		  network_id = #{value}
+	</select>
+	
+	<!-- 网点查询(全部) -->
+	<select id="selectNetWorkAll" resultMap="netWorkMapper">
+		SELECT
+		  network_id,
+		  network_addressid  
+		FROM
+		  network
+	</select>
+	
+	<!-- 网点查询(条件查询) -->
+	<select id="selectNetWorkChoose" parameterType="com.sq.pojo.NetWork" resultMap="netWorkMapper">
+		SELECT
+		  network_id,
+		  network_addressid
+		FROM
+		  network
+		<where>
+		<choose>
+			<when test="networkId != 0">
+				and network_id = #{networkId}
+			</when>
+			<when test="networkAddressid != 0">
+				and network_addressid = #{networkAddressid}
+			</when>
+			<otherwise>
+				1=1
+			</otherwise>
+		</choose>
+		</where>
+	</select>
+	
+	<!-- 模糊查询 -->
+	<select id="selectNetWorkLike" parameterType="com.sq.pojo.NetWork" resultMap="netWorkMapper">
+		SELECT
+		  network_id,
+		  network_addressid
+		FROM
+		  network
+		<where>
+			<if test="networkAddressid != 0">
+				and network_addressid like concat('%',#{networkAddressid},'%')
+			</if>
+		</where>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qyqjava.mapper.AllocationMapper">
+	<resultMap id="BaseResultMap"
+		type="com.qyqjava.pojo.Allocation">
+		<id column="no" property="no" jdbcType="INTEGER" />
+		<result column="allocation_ID" property="allocationId"
+			jdbcType="INTEGER" />
+		<result column="allocation_type" property="allocationType"
+			jdbcType="INTEGER" />
+		<result column="order_ID" property="orderId" jdbcType="VARCHAR" />
+		<result column="wrehouse_ID" property="wrehouseId"
+			jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		no, allocation_ID, allocation_type, order_ID, wrehouse_ID
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.qyqjava.pojo.AllocationExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from allocation
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from allocation
+		where no = #{no,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from allocation
+		where no = #{no,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.qyqjava.pojo.AllocationExample">
+		delete from allocation
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.qyqjava.pojo.Allocation">
+		insert into allocation (no, allocation_ID, allocation_type,
+		order_ID, wrehouse_ID)
+		values (#{no,jdbcType=INTEGER}, #{allocationId,jdbcType=INTEGER},
+		#{allocationType,jdbcType=INTEGER},
+		#{orderId,jdbcType=VARCHAR}, #{wrehouseId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.qyqjava.pojo.Allocation">
+		insert into allocation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="no != null">
+				no,
+			</if>
+			<if test="allocationId != null">
+				allocation_ID,
+			</if>
+			<if test="allocationType != null">
+				allocation_type,
+			</if>
+			<if test="orderId != null">
+				order_ID,
+			</if>
+			<if test="wrehouseId != null">
+				wrehouse_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="no != null">
+				#{no,jdbcType=INTEGER},
+			</if>
+			<if test="allocationId != null">
+				#{allocationId,jdbcType=INTEGER},
+			</if>
+			<if test="allocationType != null">
+				#{allocationType,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="wrehouseId != null">
+				#{wrehouseId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.qyqjava.pojo.AllocationExample"
+		resultType="java.lang.Integer">
+		select count(*) from allocation
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update allocation
+		<set>
+			<if test="record.no != null">
+				no = #{record.no,jdbcType=INTEGER},
+			</if>
+			<if test="record.allocationId != null">
+				allocation_ID = #{record.allocationId,jdbcType=INTEGER},
+			</if>
+			<if test="record.allocationType != null">
+				allocation_type = #{record.allocationType,jdbcType=INTEGER},
+			</if>
+			<if test="record.orderId != null">
+				order_ID = #{record.orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.wrehouseId != null">
+				wrehouse_ID = #{record.wrehouseId,jdbcType=INTEGER},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update allocation
+		set no = #{record.no,jdbcType=INTEGER},
+		allocation_ID = #{record.allocationId,jdbcType=INTEGER},
+		allocation_type = #{record.allocationType,jdbcType=INTEGER},
+		order_ID = #{record.orderId,jdbcType=VARCHAR},
+		wrehouse_ID = #{record.wrehouseId,jdbcType=INTEGER}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.qyqjava.pojo.Allocation">
+		update allocation
+		<set>
+			<if test="allocationId != null">
+				allocation_ID = #{allocationId,jdbcType=INTEGER},
+			</if>
+			<if test="allocationType != null">
+				allocation_type = #{allocationType,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null">
+				order_ID = #{orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="wrehouseId != null">
+				wrehouse_ID = #{wrehouseId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where no = #{no,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.qyqjava.pojo.Allocation">
+		update allocation
+		set allocation_ID = #{allocationId,jdbcType=INTEGER},
+		allocation_type = #{allocationType,jdbcType=INTEGER},
+		order_ID = #{orderId,jdbcType=VARCHAR},
+		wrehouse_ID = #{wrehouseId,jdbcType=INTEGER}
+		where no = #{no,jdbcType=INTEGER}
+	</update>
+	<insert id="addAllocation" parameterType="java.util.Map">
+		call PLinset(#{wreid},#{totel})
+	</insert>
+	
+	<!-- 查询每个仓库的订单量 -->
+	<select id="showAllNum" resultType="Integer">
+		SELECT COUNT(a.allocation_type) FROM (
+		SELECT  * FROM allocation WHERE allocation_type = 1)a
+		GROUP BY a.wrehouse_ID
+	</select>
+
+</mapper>
