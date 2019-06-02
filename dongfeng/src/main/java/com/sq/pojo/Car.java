@@ -8,7 +8,8 @@ public class Car {
 	Integer carType;
 	String carSize;
 	String carStatus;
-	String temp3;
+	
+	//一对一
 	CarLoad loads;
 	CarType types;
 	
@@ -30,13 +31,6 @@ public class Car {
 	public void setCarSize(String carSize) {
 		this.carSize = carSize;
 	}
-	public String getTemp3() {
-		return temp3;
-	}
-	public void setTemp3(String temp3) {
-		this.temp3 = temp3;
-	}
-	
 	public Integer getCarWeight() {
 		return carWeight;
 	}
@@ -69,11 +63,7 @@ public class Car {
 	public void setTypes(CarType types) {
 		this.types = types;
 	}
-	@Override
-	public String toString() {
-		return "Car [carId=" + carId + ", carPlate=" + carPlate + ", carWeight=" + carWeight + ", carType=" + carType
-				+ ", carSize=" + carSize + ", carStatus=" + carStatus + ", temp3=" + temp3 + "]";
-	}
+	
 	
 	
 	

@@ -58,107 +58,99 @@
 	</style>
 
 	<body>
-
-			
 		<div class="container" style="margin-top: 50px">
-			<form class="form-inline" action="${pageContext.request.contextPath }/waybil/waybil">
+			<form class="form-inline" action="${pageContext.request.contextPath }/createSchedule/createSchedule">
 				<div class="form-group" style="margin-left: 15px;">
-					<label for="exampleInputEmail2">出发仓库</label> 
-					<select	class="form-control" id="exampleInputEmail2" placeholder="仓库地址" name="wrehouseName">
+					<label  for="exampleStartPoint">出发仓库</label> 
+					<select	class="form-control" id="exampleStartPoint" placeholder="仓库地址" name="wrehouseId" onchange="createWaybilLists()">
 						<option value="">--请选择--</option>
 						<c:forEach items="${wrehouseList}" var="item">
-							<option value="${item.wrehouseName}" <c:if test="${item.wrehouseName == wrehouseName}"> selected</c:if> >${item.wrehouseName }</option>
+							<option value="${item.wrehouseId}" >${item.wrehouseName }</option>
 						</c:forEach>
 					</select>
 				</div>
 				<div class="form-group" style="margin-left: 15px;">
-					<label for="exampleInputEmail2">运单号</label> 
-					<select	class="form-control" id="exampleInputEmail2" placeholder="仓库地址" name="wrehouseName">
+					<label for="exampleEndPoint">目的地</label> 
+					<select	class="form-control" id="exampleEndPoint" placeholder="目的地" name="recipientsProvince" onchange="createWaybilLists()">
 						<option value="">--请选择--</option>
-						<c:forEach items="${wrehouseList}" var="item">
-							<option value="${item.wrehouseName}" <c:if test="${item.wrehouseName == wrehouseName}"> selected</c:if> >${item.wrehouseName }</option>
+						<c:forEach items="${chinaList}" var="item">
+							<option value="${item.name}">${item.name}</option>
 						</c:forEach>
+					</select>
+				</div>
+				<div class="form-group" style="margin-left: 15px;">
+					<label for="exampleLine">路线</label> 
+					<select	class="form-control" id="exampleLine" placeholder="路线" name="lineId">
+						<option value="">--请选择--</option>
+						<%-- <c:forEach items="${chinaList}" var="item"> --%>
+							<option value="1">1</option>
+						<%-- </c:forEach> --%>
 					</select>
 				</div>
 				
 				<div class="form-group" style="margin-left: 15px;">
-					<label for="exampleInputEmail2">路线</label> 
-					<select	class="form-control" id="exampleInputEmail2" placeholder="目的地" name="recipientsProvince">
+					<label for="exampleDriver">司机</label>
+					<select	class="form-control" id="exampleDriver" placeholder="司机" name="driverId">
 						<option value="">--请选择--</option>
-						<c:forEach items="${chinaList}" var="item">
-							<option value="${item.name}" <c:if test="${item.name == recipientsProvince}"> selected</c:if> >${item.name }</option>
+						<c:forEach items="${driverList}" var="item">
+							<option value="${item.driverId}" <c:if test="${item.driverId == recipientsProvince}"> selected</c:if> >${item.driverId }</option>
 						</c:forEach>
 					</select>
+					<a class="btn btn-default" onclick="driverEnquiry()">查询司机详情</a>
 				</div>
+				
 				<div class="form-group" style="margin-left: 15px;">
-					<label for="exampleInputEmail2">司机</label> 
-					<input value="${orderTime }"  type="text" placeholder="时间" name="orderTime" style="width: 150px" class="form-control" id="exampleInputEmail2">
+					<label for="exampleCar">车辆</label> 
+					<select	class="form-control" id="exampleCar" placeholder="车辆" name="carId">
+						<option value="">--请选择--</option>
+						<c:forEach items="${carList}" var="item">
+							<option value="${item.carId}" <c:if test="${item.carId == recipientsProvince}"> selected</c:if> >${item.carId }</option>
+						</c:forEach>
+					</select>
+					<a class="btn btn-default" onclick="carEnquiry()">查询车辆详情</a>
 				</div>
-				<div class="form-group" style="margin-left: 15px;">
-					<label for="exampleInputEmail2">车辆</label> 
-					<input value="${orderTime }"  type="text" placeholder="时间" name="orderTime" style="width: 150px" class="form-control" id="exampleInputEmail2">
+				
+				<div class="form-group" style="margin-left: 15px;margin-top: 15px">
+					<label for="exampleStartTime">预计出发时间</label> 
+					<input type="date" placeholder="时间" name="controlStarttime" style="width: 150px" class="form-control" id="exampleStartTime">
 				</div>
-				<div class="form-group" style="margin-left: 15px;">
-					<label for="exampleInputEmail2">出发时间</label> 
-					<input value="${orderTime }"  type="date" placeholder="时间" name="orderTime" style="width: 150px" class="form-control" id="exampleInputEmail2">
+				
+				<div class="form-group" style="margin-left: 15px;margin-top: 15px">
+					<label for="exampleEndTime">预计到达时间</label> 
+					<input type="date" placeholder="时间" name="controlEndtime" style="width: 150px" class="form-control" id="exampleEndTime">
 				</div>
-				<button type="submit" class="btn btn-default">查询</button>
+				
+				<div class="form-group" style="margin-left: 15px; margin-top: 15px">
+					<label for="exampleWaybilId">运单号</label> 
+					<select	class="form-control" id="exampleWaybilId" placeholder="运单号" name="WaybilId" onchange="check()">
+						<option value="">--请选择--</option>
+						<%-- <c:forEach items="${waybilList}" var="item">
+							<option value="${item}" <c:if test="${item == wrehouseName}"> selected</c:if> >${item }</option>
+						</c:forEach> --%>
+					</select>
+					<input type="button" id="sq-botton" class="btn btn-default" onclick="waybilEnquiry()" disabled="disabled" value="查询运单详情"/>
+				</div>
+				<!-- <button type="submit" class="btn btn-default" style="margin-top: 15px">提交</button> -->
 			</form>
 			
 			<!-- <div id="tj">
 				<a href="#" class="btn btn-default" data-toggle="modal" data-target="#driverInsertDialog" >添加</a>
 			</div> -->
 			
-			<table id="guide-table1" class="table table-striped table table-bordered table table-hover" style="margin-top: 30px;text-align: center;">
-				<tr>
-					<th style="text-align: center;"><input type="checkbox" id="sq-orderid" onclick="sqcli()" ></th>
-					<th style="text-align: center;">订单编号</th>
-					<th style="text-align: center;">寄件人姓名</th>
-					<th style="text-align: center;">寄件人电话</th>
-					<th style="text-align: center;">寄件人地址</th>
-					<th style="text-align: center;">收件省份</th>
-					<th style="text-align: center;">订单生成时间</th>
-					<th style="text-align: center;">订单货物重量</th>
-					<th style="text-align: center;">订单货物类型</th>
-					<th style="text-align: center;">订单金额</th>
-					<th style="text-align: center;">订单状态</th>
-					<!-- <th style="text-align: center;">操作</th> -->
-				</tr>
-		
-				<c:forEach items="${page.rows }" var="row" >
-					
-                	<tr>
-						<td><input type="checkbox" class="mycheckbox" name="orderId" value="${row.order.orderId }" id="${row.order.orderId }" ></td>
-						<td>${row.order.orderId }</td>
-						<td>${row.order.orderMailName }</td>
-						<td>${row.order.orderMailPhone }</td>
-						<td>${row.order.orderMailAddress }</td>
-						<td>${row.order.recipient.recipientsProvince }</td>
-						<td>${row.order.orderTime }</td>
-						<td>${row.order.orderWeight }</td>
-						<td>${row.order.orderType }</td>
-						<td>${row.order.orderMoney }</td>
-						<td>${(row.order.orderState == 0)?"未发货":"已发货" }</td>
-						<%-- <td>
-							<button class="btn btn-primary btn-xs" id="deleteDriver" onclick="deleteDriver(${row.driverId})">删除</button>
-							<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#driverEditDialog" onclick="editDriver(${row.driverId})">修改</a>
-						</td> --%>
-					</tr>
-					</volist>
-				</c:forEach>
-				</table>
-				<%-- <button class="btn btn-primary btn-xs" id="deleteDriver" onclick="deleteDriver(${row.driverId})">删除</button> --%>
-				<a class="btn btn-primary btn-xs" style="padding: 8px;" data-toggle="modal" data-target="#waybilEditDialog" onclick="editWaybil(),createWaybilId()">提交</a>
-			
+			<table id="t" class="table table-striped table table-bordered table table-hover" style="margin-top: 30px;text-align: center;">
+				
+			</table>
+			<%-- <button class="btn btn-primary btn-xs" id="deleteDriver" onclick="deleteDriver(${row.driverId})">删除</button> --%>
 			<div class="col-md-12 text-right">
-				<itcast:page url="${pageContext.request.contextPath }/waybil/waybil"/>
+				<itcast:page url="${pageContext.request.contextPath }/createSchedule/createSchedule"/>
 			</div>
+			<a class="btn btn-primary btn-xs" style="padding: 8px;" data-toggle="modal" data-target="#scheduleEditDialog" onclick="editSchedule()">生成调度单</a>
 		</div>
 		
 		
 		
 		<!-- 车辆信息编辑对话框 -->
-		<div class="modal fade" id="waybilEditDialog" tabindex="-1" role="dialog"
+		<div class="modal fade" id="scheduleEditDialog" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document" style="width:1040px; ">
 			<div class="modal-content">
@@ -167,28 +159,27 @@
 						<span aria-hidden="true">关闭</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-					运单号:<span style="color: red;font-weight: bold;" id="waybilId"></span>
+						调度单号:<span style="color: red;font-weight: bold;" id="controlsId"></span>
 					</h4>
 				</div>
 				<div class="modal-body" id="createWaybil">
-					<table id="t" border="1" class="table table-striped table table-bordered table table-hover" style="margin-top: 30px;text-align: center;">
+					<table id="sq-table1" border="1" class="table table-striped table table-bordered table table-hover" style="margin-top: 30px;text-align: center;">
 						<tr>
-							<th style="text-align: center;">订单编号</th>
-							<th style="text-align: center;">寄件人姓名</th>
-							<th style="text-align: center;">寄件人电话</th>
-							<th style="text-align: center;">寄件人地址</th>
-							<th style="text-align: center;">收件省份</th>
-							<th style="text-align: center;">订单生成时间</th>
-							<th style="text-align: center;">订单货物重量</th>
-							<th style="text-align: center;">订单货物类型</th>
-							<th style="text-align: center;">订单金额</th>
-							<th style="text-align: center;">订单状态</th>
+							<th style="text-align: center;">编号</th>
+							<th style="text-align: center;">仓库</th>
+							<th style="text-align: center;">运单号</th>
+							<th style="text-align: center;">目的地</th>
+							<th style="text-align: center;">路线</th>
+							<th style="text-align: center;">车辆</th>
+							<th style="text-align: center;">司机</th>
+							<th style="text-align: center;">预计出发时间</th>
+							<th style="text-align: center;">预计达到时间</th>
 						</tr>
 					</table>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveWaybil()">保存</button>
+					<button type="button" class="btn btn-primary" aria-label="Close" data-dismiss="modal" onclick="saveSchedule()">保存</button>
 				</div>
 			</div>
 		</div>
@@ -250,7 +241,252 @@
 		<script type="text/javascript">
 		
 		
-		function editWaybil() {
+		
+		function check(){
+	        var waybilId = document.getElementById("exampleWaybilId").value;
+	        alert(waybilId);
+	        if(waybilId != ""){
+	            document.getElementById("sq-botton").disabled="";
+	        }else{
+	            document.getElementById("sq-botton").disabled="disabled";
+	        }
+	    };
+	    
+		/* 写车辆表格 */
+		function carEnquiry() {
+			var carId = document.getElementById("exampleCar").value;
+			if(carId == ""){
+				carId = 0;
+			}
+			$.ajax({
+				type:"get",
+				url:"<%=basePath%>Schedule/createSchedule/enquiryCar",
+				data:{"carId":carId},
+				success:function(res) {
+					alert("success");
+					$("#t tr").remove();
+					$("#t").append("<tr><th style=\"text-align: center;\">编号</th><th style=\"text-align: center;\">车牌号</th><th style=\"text-align: center;\">载重</th><th style=\"text-align: center;\">车型</th><th style=\"text-align: center;\">车尺寸</th><th style=\"text-align: center;\">状态</th></tr>");
+					$(res).each(function(index,ob){
+						$("#t").append("<tr><td>"+this.carId+"</td><td>"+this.carPlate+"</td><td>"+this.loads.carloads+"</td><td>"+this.types.cartypes+"</td><td>"+this.carSize+"</td><td>"+"闲置中 "+ "</td></tr>");
+					})
+				}
+			});
+		};
+		/* 写司机表格 */
+		function driverEnquiry() {
+			var driverId = document.getElementById("exampleDriver").value;
+			if(driverId == ""){
+				driverId = 0;
+			}
+			$.ajax({
+				type:"get",
+				url:"<%=basePath%>Schedule/createSchedule/enquiryDriver",
+				data:{"driverId":driverId},
+				success:function(res) {
+					alert("success");
+					$("#t tr").remove();
+					$("#t").append("<tr><th style=\"text-align: center;\">编号</th><th style=\"text-align: center;\">姓名</th><th style=\"text-align: center;\">年龄</th><th style=\"text-align: center;\">电话</th><th style=\"text-align: center;\">地址</th><th style=\"text-align: center;\">状态</th></tr>");
+					$(res).each(function(index,ob){
+						$("#t").append("<tr><td>"+this.driverId+"</td><td>"+this.driverName+"</td><td>"+this.driverAge+"</td><td>"+this.driverPhone+"</td><td>"+this.driverAddress+"</td><td>"+"闲置中 "+"</td></tr>");
+					})
+				}
+			});
+		};
+		/*写运单号列表  */
+		function createWaybilLists() {
+			var startPoint = $("#exampleStartPoint").val();
+			var endPoint = $("#exampleEndPoint").val();
+			if(startPoint == ""){
+				startPoint = 0;
+			}
+			if(endPoint == ""){
+				endPoint = 0;
+			}
+			var param1 = {"startPoint":startPoint,"endPoint":endPoint};
+			$.ajax({
+				type:"get",
+				url:"<%=basePath%>Schedule/createSchedule/createWaybilLists",
+				/* contentType:"application/json; charset=utf-8", */
+	            dataType:"json",
+				data:param1,
+				success:function(res) {
+					alert("success");
+					$("#exampleWaybilId").find("option").remove();
+					$("#exampleWaybilId").append("<option value=\"\">-- 请选择 - - </option>");
+					$(res).each(function(index,ob){
+						$("#exampleWaybilId").append("<option value=\""+this.waybilId+"\">"+this.waybilId+"</option>");
+					})
+				}
+			});
+		};
+		/*写运单号表格  */
+		function waybilEnquiry() {
+			alert("js==waybilEnquiry");
+			var waybilId = $("#exampleWaybilId").val();
+			alert("waybilId=="+waybilId);
+			if(waybilId == ""){
+				waybilId = 0;
+			}
+			var param1 = {"waybilId":waybilId};
+			$.ajax({
+				type:"get",
+				url:"<%=basePath%>Schedule/createSchedule/waybilEnquiry",
+				/* contentType:"application/json; charset=utf-8", */
+	            dataType:"json",
+				data:param1,
+				success:function(res) {
+					alert("success");
+					$("#t tr").remove();
+					$("#t").append("<tr><th style=\"text-align: center;\">订单编号</th><th style=\"text-align: center;\">订单货物类型</th><th style=\"text-align: center;\">订单货物重量</th><th style=\"text-align: center;\">订单金额</th><th style=\"text-align: center;\">运单号</th></tr>");
+					$(res).each(function(index,ob){
+						$("#t").append("<tr><td>"+this.order.orderId+"</td><td>"+this.order.orderType+"</td><td>"+this.order.orderWeight+"</td><td>"+this.order.orderMoney+"</td><td>"+this.waybilId+"</td></tr>");
+					})
+				}
+			});
+		};
+		/*写调度单表格  */
+		function editSchedule() {
+			var controlWrehouseId = $("#exampleStartPoint").val();
+			var controlDestination = $("#exampleEndPoint").val();
+			var controlLineid = $("#exampleLine").val();
+			var controlDriverid = $("#exampleDriver").val();
+			var controlCarid = $("#exampleCar").val();
+			var controlStarttime = $("#exampleStartTime").val();
+			var controlEndtime = $("#exampleEndTime").val();
+			var controlWaybilid = $("#exampleWaybilId").val();
+			alert("WrehouseId="+controlWrehouseId);
+			alert("Destination="+controlDestination);
+			alert("Lineid="+controlLineid);
+			alert("Driverid="+controlDriverid);
+			alert("Carid="+controlCarid);
+			alert("Starttime="+controlStarttime);
+			alert("Endtime="+controlEndtime);
+			alert("Waybilid="+controlWaybilid);
+			if(controlWrehouseId == ""){
+				alert("请填写仓库信息");
+				return;
+			}
+			if(controlDestination == ""){
+				alert("请写目的地信息");
+				return;
+			}
+			 if(controlLineid == ""){
+				 alert("请写路线信息");
+				 return; 
+			} 
+			if(controlDriverid == ""){
+				alert("请写司机信息");
+				return;
+			}
+			if(controlCarid == ""){
+				alert("请写车辆信息");
+				return;
+			}
+			if(controlStarttime == ""){
+				alert("请写出发时间信息");
+				return;
+			}
+			if(controlEndtime == ""){
+				alert("请写到达时间信息");
+				return;
+			}
+			if(controlWaybilid == ""){
+				alert("请写运单号信息");
+				return;
+			}
+			var param1 = {"controlWrehouseId":controlWrehouseId,"controlDestination":controlDestination,"controlLineid":controlLineid,
+					"controlDriverid":controlDriverid,"controlCarid":controlCarid,"controlStarttime":controlStarttime,"controlEndtime":controlEndtime,"controlWaybilid":controlWaybilid};
+			$.ajax({
+				type:"get",
+				url:"<%=basePath%>Schedule/createSchedule/editSchedule",
+	            dataType:"json",
+				data:param1,
+				success:function(res) {
+					alert("success");
+					$("#controlsId").text(res.controlId);
+					$("#sq-table1 tr:not(:first)").remove();
+					$("#sq-table1").append("<tr><td>"+res.controlId+"</td><td>"+res.controlWrehouseId+"("+res.wrehouse.wrehouseName+")"+"</td><td>"+res.controlWaybilid+"</td><td>"+res.controlDestination+"</td><td>"+res.controlLineid+"</td><td>"+res.controlCarid+"("+res.car.carPlate+")"+"</td><td>"+res.controlDriverid+"("+res.driver.driverName+")"+"</td><td>"+res.controlStarttime+"</td><td>"+res.controlEndtime+"</td></tr>");
+				}
+			});
+		}
+		
+		function saveSchedule() {
+			var controlWrehouseId = $("#exampleStartPoint").val();
+			var controlDestination = $("#exampleEndPoint").val();
+			var controlLineid = $("#exampleLine").val();
+			var controlDriverid = $("#exampleDriver").val();
+			var controlCarid = $("#exampleCar").val();
+			var controlStarttime = $("#exampleStartTime").val();
+			var controlEndtime = $("#exampleEndTime").val();
+			var controlWaybilid = $("#exampleWaybilId").val();
+			if(controlWrehouseId == ""){
+				alert("请填写仓库信息");
+				return;
+			}
+			if(controlDestination == ""){
+				alert("请写目的地信息");
+				return;
+			}
+			 if(controlLineid == ""){
+				 alert("请写路线信息");
+				 return; 
+			} 
+			if(controlDriverid == ""){
+				alert("请写司机信息");
+				return;
+			}
+			if(controlCarid == ""){
+				alert("请写车辆信息");
+				return;
+			}
+			if(controlStarttime == ""){
+				alert("请写出发时间信息");
+				return;
+			}
+			if(controlEndtime == ""){
+				alert("请写到达时间信息");
+				return;
+			}
+			if(controlWaybilid == ""){
+				alert("请写运单号信息");
+				return;
+			}
+			var param1 = {"controlWrehouseId":controlWrehouseId,"controlDestination":controlDestination,"controlLineid":controlLineid,
+					"controlDriverid":controlDriverid,"controlCarid":controlCarid,"controlStarttime":controlStarttime,"controlEndtime":controlEndtime,"controlWaybilid":controlWaybilid};
+			$.ajax({
+				type:"get",
+				url:"<%=basePath%>Schedule/createSchedule/saveSchedule",
+				data:param1,
+				success:function(res) {
+					if("OK" == res){
+						alert("新增调度单成功");
+					}else{
+						alert("新增调度单失败");
+					}
+				}
+			});
+		}
+		
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+		
+		
+		
+		
+		
+		
+		<%-- function editWaybil() {
 			$.ajax({
 				type:"get",
 				url:"<%=basePath%>waybil/editWaybil",
@@ -342,7 +578,7 @@
 		       else {
 		         RemoveCookie(i)
 		       } 
-		    }
+		    } 
 			//点击选中复选框,设置cookie
 		    $(".mycheckbox").click(function(){
 		       var uid =$(this).attr('id');
@@ -393,7 +629,7 @@
 	 		    //3. 设置当前时间+5分钟：把当前分钟数+5后的值重新设置为date对象的分钟数
 	            myDate.setMinutes(min+1);
 	            document.cookie="ArticleId="+value+"; expires=" + myDate.toGMTString();            
-	       }  
+	       }  --%>
 		   
 		
 			<%-- function deleteDriver(driverId) {
@@ -420,7 +656,7 @@
 				});
 			} --%>
 			
-			function sqcli(){
+			/* function sqcli(){
 				//获取控制其它复选框的对象obj
 				var collid = document.getElementById("sq-orderid");
 				//获取需要全选，全不选功能的所有复选框
@@ -446,7 +682,7 @@
 				      RemoveCookie(uid);
 		           })
 				}
-			}
+			} */
 			
 			
 			

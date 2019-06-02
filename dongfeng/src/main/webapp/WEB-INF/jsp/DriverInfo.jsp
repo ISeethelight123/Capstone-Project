@@ -154,6 +154,12 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label for="edit_driverAddress" style="float:left;padding:7px 15px 0 55px;">地址</label>
+							<div class="col-sm-10"> 
+								<input type="text" class="form-control" id="edit_driverAddress" placeholder="地址" name="driverAddress">
+							</div>
+						</div>
+						<div class="form-group">
 							<label for="edit_driverStatus" style="float:left;padding:7px 15px 0 55px;">状态</label>
 							<div class="col-sm-10">
 								<select	class="form-control" id="edit_driverStatus" name="driverStatus">

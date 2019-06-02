@@ -16,8 +16,6 @@ public class Allocation {
 	//表一对一
 	private Orders order;
 
-	
-
 	public Orders getOrder() {
 		return order;
 	}

@@ -2,6 +2,8 @@ package com.sq.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,7 @@ import com.sq.service.AllocationService;
 @Service
 public class AllocatinServiceImpl implements AllocationService {
 
-	@Autowired
+	@Resource(name="allocationMappersq")
 	AllocationMapper allocationMapper;
 	
 	/**
@@ -50,7 +52,7 @@ public class AllocatinServiceImpl implements AllocationService {
 		}
 		//设置总条数
 		Integer allocationCount = allocationMapper.selectAllocationCountByWrehouseId(vo);
-		System.out.println("carCount---"+allocationCount);
+		System.out.println("allocationCount---"+allocationCount);
 		page.setTotal(allocationCount);
 		
 		//设置查询后的记录

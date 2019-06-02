@@ -1,6 +1,5 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -175,13 +174,13 @@
 							<a href="#">仓库管理</a>
 							<ul>
 								<li><b class="tip"></b>
-									<a target="Conframe" href="WrehouseInfo.html">仓库信息管理</a>
+									<a target="Conframe" href="/connect3ion/goWrehouseInfo">仓库信息管理</a>
 								</li>
 								<li><b class="tip"></b>
-									<a target="Conframe" href="InWrehouse.html">入库管理</a>
+									<a target="Conframe" href="/connection/goInWrehouse">入库管理</a>
 								</li>
 								<li><b class="tip"></b>
-									<a target="Conframe" href="OutWrehouse.html">出库管理</a>
+									<a target="Conframe" href="/connection/goOutWrehouse">出库管理</a>
 								</li>
 							</ul>
 						</li>
@@ -217,13 +216,13 @@
 							</a>
 							<ul>
 								<li><b class="tip"></b>
-									<a target="Conframe" href="CarController">调度单管理</a>
+									<a target="Conframe" href="Schedule/manageSchedule/manageSchedule">调度单管理</a>
 								</li>
 								<li><b class="tip"></b>
-									<a target="Conframe" href="/waybil/createController">新增调度单</a>
+									<a target="Conframe" href="Schedule/createSchedule/createSchedule">新增调度单</a>
 								</li>
 								<li><b class="tip"></b>
-									<a target="Conframe" href="/waybil/waybil">新增运单</a>
+									<a target="Conframe" href="waybil/waybil">新增运单</a>
 								</li>
 							</ul>
 						</li>

@@ -1,6 +1,10 @@
 package com.sq.service.impl;
 import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.sq.common.utils.Page;
 import com.sq.mapper.CarMapper;
@@ -79,6 +83,11 @@ public class CarServiceImpl implements CarService {
 			page.setPage(vo.getPage());
 			//设置起始行
 			vo.setStartRow((vo.getPage()-1)*vo.getSize());
+			
+			//判断车id
+			if (vo.getCarId() != null && vo.getCarId() != 0) {
+				vo.setCarId(vo.getCarId());
+			}
 			//判断车牌
 			if (vo.getCarPlate() != null && !"".equals(vo.getCarPlate().trim())) {
 				vo.setCarPlate(vo.getCarPlate().trim());
@@ -107,6 +116,13 @@ public class CarServiceImpl implements CarService {
 		List<Car> carList = carMapper.selectCarLikeByQueryVo(vo);
 		page.setRows(carList);
 		return page;
+	}
+
+	/**
+	 * 获得列表
+	 */
+	public List<Car> selectCarByQueryVo(CarQueryVo vo) {
+		return carMapper.selectCarByQueryVo(vo);
 	}
 
 }

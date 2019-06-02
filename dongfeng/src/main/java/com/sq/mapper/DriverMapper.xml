@@ -34,6 +34,30 @@
 		  driver
 		WHERE driver_id = #{value}
 	</delete>
+	<!-- 修改司机 -->
+	<update id="updateDriver" parameterType="com.sq.pojo.Driver">
+		UPDATE
+		  driver
+		<set>
+			<if test='driverName != null and driverName != "" '>
+				driver_name = #{driverName},
+			</if>
+			<if test='driverPhone != null and driverPhone != "" '>
+				driver_phone = #{driverPhone},
+			</if>
+			<if test="driverAge != null">
+				driver_age = #{driverAge},
+			</if>
+			<if test='driverAddress != null and driverAddress != "" '>
+				driver_address = #{driverAddress},
+			</if>
+			<if test='driverStatus != null and driverStatus != "" '>
+				driver_status = #{driverStatus}
+			</if>
+		</set>
+		WHERE driver_id = #{driverId}
+	</update>
+	
 	<!-- 查询一个by driver_id -->
 	<select id="selectDriverOneById" parameterType="java.lang.Integer" resultMap="DriverMap">
 		SELECT
@@ -55,22 +79,20 @@
 		FROM
 		  driver
 		<where>
-			<if test="driverName != null and driverName !=''">
+			<if test='driverName != null and driverName != ""'>
 				and driver_name like "%"#{driverName}"%"
 			</if>
-			<if test="driverId != null">
+			<if test="driverId != null and driverId != 0">
 				and driver_id = #{driverId}
 			</if>
-			<if test="driverPhone != null and driverPhone !=''">
+			<if test='driverPhone != null and driverPhone != ""'>
 				and driver_phone = #{driverPhone}
 			</if>
-			<if test="driverStatus != null and driverStatus != ''">
+			<if test='driverStatus != null and driverStatus != "" '>
 				and driver_status = #{driverStatus}
 			</if>
 		</where> 
 	</select>
-	
-	
 	
 	<!-- 查询分页 模糊查询 -->
 	<select id="selectDriverLikeByQueryVo" parameterType="com.sq.pojo.DriverQueryVo" resultMap="DriverMap">
@@ -84,20 +106,46 @@
 		FROM
 		  driver
 		<where>
-			<if test="driverName != null and driverName !=''">
+			<if test='driverName != null and driverName != ""'>
 				and driver_name like "%"#{driverName}"%"
 			</if>
-			<if test="driverId != null">
+			<if test="driverId != null and driverId != 0">
 				and driver_id = #{driverId}
 			</if>
-			<if test="driverPhone != null and driverPhone !=''">
+			<if test='driverPhone != null and driverPhone != "" '>
 				and driver_phone = #{driverPhone}
 			</if>
-			<if test="driverStatus != null and driverStatus != ''">
+			<if test='driverStatus != null and driverStatus != "" '>
 				and driver_status = #{driverStatus}
 			</if>
 		</where>
 		limit #{startRow},#{size} 
+	</select>
+	<!-- 获得查询列表 -->
+	<select id="selectDriverByQueryVo" parameterType="com.sq.pojo.DriverQueryVo" resultMap="DriverMap">
+		SELECT
+		  driver_id,
+		  driver_name,
+		  driver_phone,
+		  driver_age,
+		  driver_address,
+		  driver_status
+		FROM
+		  driver
+		<where>
+			<if test='driverName != null and driverName != ""'>
+				and driver_name like "%"#{driverName}"%"
+			</if>
+			<if test="driverId != null and driverId != 0">
+				and driver_id = #{driverId}
+			</if>
+			<if test='driverPhone != null and driverPhone != ""'>
+				and driver_phone = #{driverPhone}
+			</if>
+			<if test='driverStatus != null and driverStatus != "" '>
+				and driver_status = #{driverStatus}
+			</if>
+		</where>
 	</select>
 
 

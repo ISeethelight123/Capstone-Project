@@ -2,6 +2,8 @@ package com.sq.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.sq.pojo.Car;
 import com.sq.pojo.CarQueryVo;
 
@@ -10,6 +12,7 @@ import com.sq.pojo.CarQueryVo;
  * @author sunqi
  *
  */
+
 public interface CarMapper {
 
 	/**
@@ -47,5 +50,13 @@ public interface CarMapper {
 	 * 分页车辆查询(模糊查询)
 	 */
 	List<Car> selectCarLikeByQueryVo(CarQueryVo vo);
+	
+	/**
+	 * 获得列表
+	 */
+	List<Car> selectCarByQueryVo(CarQueryVo vo);
+	
+	
+	
 	
 }

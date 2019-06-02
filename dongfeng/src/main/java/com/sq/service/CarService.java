@@ -2,6 +2,8 @@ package com.sq.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.sq.common.utils.Page;
 import com.sq.pojo.Car;
 import com.sq.pojo.CarQueryVo;
@@ -43,6 +45,10 @@ public interface CarService {
 	 */
 	Page<Car> selectCarLikeByQueryVo(CarQueryVo vo);
 	
+	/**
+	 * 获得列表
+	 */
+	List<Car> selectCarByQueryVo(CarQueryVo vo);
 	
 	
 	

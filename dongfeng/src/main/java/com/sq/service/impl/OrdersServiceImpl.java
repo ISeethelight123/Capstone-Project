@@ -2,6 +2,8 @@ package com.sq.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -11,7 +13,7 @@ import com.sq.service.OrdersService;
 @Controller
 public class OrdersServiceImpl implements OrdersService {
 
-	@Autowired
+	@Resource(name="ordersMappersq")
 	OrdersMapper ordersMapper;
 	
 	//查询订单(根据id)

@@ -80,10 +80,10 @@
 		  line
 		<where>
 		<choose>
-			<when test="lineStartpoint != null">
+			<when test='lineStartpoint != null and lineStartpoint != "" '>
 				and line_startpoint = #{lineStartpoint}
 			</when>
-			<when test="lineDestination != null">
+			<when test='lineDestination != null and lineDestination != "" '>
 				and line_destination = #{lineDestination}
 			</when>
 			<otherwise>

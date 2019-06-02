@@ -65,13 +65,13 @@
 			    AND al.`order_ID` = o.`order_id`
 			   	AND o.`recipients_id` = re.`recipients_id`
 		 	</if>
-		 	<if test="wrehouseName != null and wrehouseName != '' ">
+		 	<if test='wrehouseName != null and wrehouseName != "" '>
  				and wr.wrehouse_name = #{wrehouseName}
 		 	</if>
-		 	<if test="recipientsProvince != null and recipientsProvince != '' ">
+		 	<if test='recipientsProvince != null and recipientsProvince != "" '>
 		 		and re.recipients_province = #{recipientsProvince}
 		 	</if>
-		 	<if test="orderTime != null and orderTime != '' ">
+		 	<if test='orderTime != null and orderTime != "" '>
 		 		and o.order_time = #{orderTime}
 		 	</if>
 		 </where> 
@@ -92,13 +92,13 @@
 			    AND al.`order_ID` = o.`order_id`
 			   	AND o.`recipients_id` = re.`recipients_id`
 		 	</if>
-		 	<if test="wrehouseName != null and wrehouseName != '' ">
+		 	<if test='wrehouseName != null and wrehouseName != "" '>
  				and wr.wrehouse_name = #{wrehouseName}
 		 	</if>
-		 	<if test="recipientsProvince != null and recipientsProvince != '' ">
+		 	<if test='recipientsProvince != null and recipientsProvince != "" '>
 		 		and re.recipients_province = #{recipientsProvince}
 		 	</if>
-		 	<if test="orderTime != null and orderTime != '' ">
+		 	<if test='orderTime != null and orderTime != "" '>
 		 		and o.order_time = #{orderTime}
 		 	</if>
 		 </where>

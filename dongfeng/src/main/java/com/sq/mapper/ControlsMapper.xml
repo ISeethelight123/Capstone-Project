@@ -9,27 +9,57 @@
 		<result property="controlWaybilid" column="control_waybilid" />
 		<result property="controlStarttime" column="control_starttime" />
 		<result property="controlEndtime" column="control_endtime" />
-		<result property="temp1" column="temp1" />
-		<result property="temp2" column="temp2" />
+		<result property="controlWrehouseId" column="control_wrehouseid" />
+		<result property="controlDestination" column="control_destination" />
 		<result property="temp3" column="temp3" />
+		<association property="car" javaType="com.sq.pojo.Car">
+			<result property="carId" column="car_Id" />
+			<result property="carPlate" column="car_Plate" />
+			<result property="carWeight" column="car_Weight" />
+			<result property="carType" column="car_Type" />
+			<result property="carSize" column="car_Size" />
+			<result property="carStatus" column="car_Status" />
+		</association>
+		<association property="driver" javaType="com.sq.pojo.Driver">
+			<result property="driverId" column="driver_Id" />
+			<result property="driverName" column="driver_Name" />
+			<result property="driverPhone" column="driver_Phone" />
+			<result property="driverAge" column="driver_Age" />
+			<result property="driverAddress" column="driver_Address" />
+			<result property="driverStatus" column="driver_Status" />
+		</association>
+		<association property="wrehouse" javaType="com.sq.pojo.Wrehouse">
+			<result property="wrehouseId" column="wrehouse_Id" />
+			<result property="wrehouseAddress" column="wrehouse_Address" />
+			<result property="wrehouseName" column="wrehouse_Name" />
+			<result property="wrehousePhone" column="wrehouse_Phone" />
+		</association>
 	</resultMap>
 	
-	<!-- 增加运单 -->
-	<insert id="addControls" parameterType="com.sq.pojo.Controls">
+	<!-- 增加调度单 -->
+	<insert id="addControls" parameterType="com.sq.pojo.Controls" >
 		INSERT INTO controls (
+		  control_id,
+		  control_carid,
 		  control_lineid,
 		  control_driverid,
 		  control_waybilid,
 		  control_starttime,
 		  control_endtime,
+		  control_wrehouseid,
+		  control_destination
 		)
 		VALUES
 		  (
+		  	#{controlId},
+		  	#{controlCarid},
 		    #{controlLineid},
 		    #{controlDriverid},
 		    #{controlWaybilid},
 		    #{controlStarttime},
 		    #{controlEndtime},
+		    #{controlWrehouseId},
+		    #{controlDestination}
 		  )
 	</insert>
 	
@@ -62,8 +92,10 @@
 		  control_driverid = #{controlDriverid},
 		  control_waybilid = #{controlWaybilid},
 		  control_starttime = #{controlStarttime},
-		  control_endtime = #{controlEndtime}
-		WHERE control_id = #{controlId};
+		  control_endtime = #{controlEndtime},
+		  control_wrehouseid = #{controlWrehouseId},
+		  control_destination = #{controlDestination}
+		WHERE control_id = #{controlId}
 	</update>
 
 	<!-- 查询单条运单by controlId -->
@@ -75,24 +107,95 @@
 		  control_driverid,
 		  control_waybilid,
 		  control_starttime,
-		  control_endtime
+		  control_endtime,
+		  control_wrehouseid,
+		  control_destination
 		from
 		  controls
 		where control_id = #{value}
 	</select>
 
-	<!-- 查询所有运单 -->
-	<select id="selectControlsAll" resultMap="controlsMap">
+	<!-- 查询分页对象 -->
+	<select id="selectControlsAllByControlsQueryVo" parameterType="com.sq.pojo.ControlsQueryVo" resultMap="controlsMap">
 		SELECT
-		  control_id,
-		  control_carid,
-		  control_lineid,
-		  control_driverid,
-		  control_waybilid,
-		  control_starttime,
-		  control_endtime 
+		  con.control_id,
+		  con.control_carid,
+		  con.control_lineid,
+		  con.control_driverid,
+		  con.control_waybilid,
+		  DATE_FORMAT(con.control_starttime,'%Y-%m-%d') 'control_starttime',
+		  DATE_FORMAT(con.control_endtime,'%Y-%m-%d') 'control_endtime',
+		  con.control_wrehouseid,
+		  con.control_destination,
+		  wre.Wrehouse_Name,
+  		  c.car_plate,
+  		  dri.driver_name
 		FROM
-		  controls
+		  `controls` con,
+		  `wrehouse` wre,
+		  `car` c,
+		  `driver` dri
+		<where>
+		<if test="1==1">
+			con.`control_carid` = c.`car_id`
+		    AND con.`control_driverid` = dri.`driver_id`
+		    AND con.`control_wrehouseid` = wre.`Wrehouse_ID`
+		</if>
+		<if test="controlId != null">
+			and con.control_id = #{controlId}
+		</if>
+		<if test="controlWrehouseId != null">
+			and con.control_wrehouseid = #{controlWrehouseId}
+		</if>
+		<if test="controlWaybilid != null">
+			and con.control_waybilid = #{controlWaybilid}
+		</if>
+		<if test='controlDestination != null and controlDestination != "" '>
+			and con.control_destination = #{controlDestination}
+		</if>
+		<if test="controlCarid != null">
+			and con.control_carid = #{controlCarid}
+		</if>
+		<if test="controlDriverid != null">
+			and con.control_driverid = #{controlDriverid}
+		</if>
+		</where>
+		limit #{startRow},#{size}
+	</select>
+	<!-- 查询符合条件的运单数量 -->
+	<select id="selectControlsCountByControlsQueryVo" parameterType="com.sq.pojo.ControlsQueryVo" resultType="java.lang.Integer">
+		SELECT
+		  count(1)
+		FROM
+		  `controls` con,
+		  `wrehouse` wre,
+		  `car` c,
+		  `driver` dri
+		<where>
+		<if test="1==1">
+			con.`control_carid` = c.`car_id`
+		    AND con.`control_driverid` = dri.`driver_id`
+		    AND con.`control_wrehouseid` = wre.`Wrehouse_ID`
+		</if>
+		<if test="controlId != null">
+			and con.control_id = #{controlId}
+		</if>
+		<if test="controlWrehouseId != null">
+			and con.control_wrehouseid = #{controlWrehouseId}
+		</if>
+		<if test="controlWaybilid != null">
+			and con.control_waybilid = #{controlWaybilid}
+		</if>
+		<if test='controlDestination != null and controlDestination != "" '>
+			and con.control_destination = #{controlDestination}
+		</if>
+		<if test="controlCarid != null">
+			and con.control_carid = #{controlCarid}
+		</if>
+		<if test="controlDriverid != null">
+			and con.control_driverid = #{controlDriverid}
+		</if>
+		</where>
 	</select>
 
 	<!-- 条件查询 -->
@@ -104,31 +207,39 @@
 		  control_driverid,
 		  control_waybilid,
 		  control_starttime,
-		  control_endtime 
+		  control_endtime,
+		  control_wrehouseid,
+		  control_destination
 		FROM
 		  controls
 		<where>
 			<choose>
-				<when test="controlId != 0">
+				<when test="controlId != null">
 					control_id = #{controlId}
 				</when>
-				<when test="controlCarid != 0">
+				<when test="controlCarid != null">
 					control_carid = #{controlCarid}
 				</when>
-				<when test="controlLineid != 0">
+				<when test="controlLineid != null">
 					control_lineid = #{controlLineid}
 				</when>
-				<when test="controlDriverid != 0">
+				<when test="controlDriverid != null">
 					control_driverid = #{controlDriverid}
 				</when>
-				<when test="controlWaybilid != 0">
+				<when test="controlWaybilid != null">
 					control_waybilid = #{controlWaybilid}
 				</when>
-				<when test="controlStarttime != null ">
+				<when test='controlStarttime != null and controlStarttime != "" '>
 					control_starttime = #{controlStarttime}
 				</when>
-				<when test="controlEndtime">
+				<when test='controlEndtime != null and controlEndtime != ""'>
 					control_endtime = #{controlEndtime}
+				</when>
+				<when test="controlWrehouseId != null">
+					control_wrehouse = #{controlWrehouse}
+				</when>
+				<when test='controlDestination != null and controlDestination !="" '>
+					control_destination = #{controlDestination}
 				</when>
 				<otherwise>
 					1=1
@@ -136,7 +247,13 @@
 			</choose>
 		</where>
 	</select>
-
+	<!-- 查询调度单的id最大值 -->
+	<select id="selectMaxControlsId" resultType="java.lang.Integer">
+		SELECT
+		  MAX(c.`control_id`)
+		FROM
+		  controls c
+	</select>
 	
 
 

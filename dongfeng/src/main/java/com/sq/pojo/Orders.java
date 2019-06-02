@@ -26,7 +26,17 @@ public class Orders {
 	
 	//表一对一
 	Recipients recipient;
+	//表一对一
+	Allocation allocation;
 	
+	
+	
+	public Allocation getAllocation() {
+		return allocation;
+	}
+	public void setAllocation(Allocation allocation) {
+		this.allocation = allocation;
+	}
 	public Recipients getRecipient() {
 		return recipient;
 	}

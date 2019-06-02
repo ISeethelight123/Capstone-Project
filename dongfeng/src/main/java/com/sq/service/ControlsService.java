@@ -2,14 +2,16 @@ package com.sq.service;
 
 import java.util.List;
 
+import com.sq.common.utils.Page;
 import com.sq.pojo.Controls;
+import com.sq.pojo.ControlsQueryVo;
 
 public interface ControlsService {
 
 	/**
 	 * 运单增加
 	 */
-	void addControls(Controls con); 
+	Integer addControls(Controls con); 
 	/**
 	 * 运单删除
 	 */
@@ -23,9 +25,15 @@ public interface ControlsService {
 	 */
 	void updateControls(Controls con);
 	/**
-	 * 运单查询(全部运单)
+	 * 运单查询(分页对象)
 	 */
-	List<Controls> selectControlsAll();
+	Page<Controls> selectControlsAllByControlsQueryVo(ControlsQueryVo vo);
+	
+	/**
+	 * 运单查询(符合条件的运单数量)
+	 */
+	Integer selectControlsCountByControlsQueryVo(ControlsQueryVo vo);
+	
 	/**
 	 * 运单查询(单个运单)
 	 */
@@ -38,7 +46,10 @@ public interface ControlsService {
 	 * 运单查询(模糊运单)
 	 */
 	//List<Controls> selectControlsLike(Controls con);
-	
+	/**
+	 * 查询调度单的id最大值
+	 */
+	Integer selectMaxControlsId();
 	
 	
 }

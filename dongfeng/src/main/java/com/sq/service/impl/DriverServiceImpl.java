@@ -87,13 +87,20 @@ public class DriverServiceImpl implements DriverService {
 		}
 		//设置总条数
 		Integer driverCount = driverMapper.selectDriverCountByQueryVo(vo);
-		System.out.println("carCount---"+driverCount);
+		System.out.println("driverCount---"+driverCount);
 		page.setTotal(driverCount);
 		
 		//设置查询后的记录
 		List<Driver> driverList = driverMapper.selectDriverLikeByQueryVo(vo);
 		page.setRows(driverList);
 		return page;
+	}
+
+	/**
+	 * 获得司机列表
+	 */
+	public List<Driver> selectDriverByQueryVo(DriverQueryVo vo) {
+		return driverMapper.selectDriverByQueryVo(vo);
 	}
 
 }

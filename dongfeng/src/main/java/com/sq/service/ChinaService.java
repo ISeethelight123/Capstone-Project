@@ -2,8 +2,10 @@ package com.sq.service;
 
 import java.util.List;
 
-import com.sq.pojo.China;
+import org.springframework.stereotype.Component;
 
+import com.sq.pojo.China;
+@Component(value="chinaServicesq")
 public interface ChinaService {
 
 	

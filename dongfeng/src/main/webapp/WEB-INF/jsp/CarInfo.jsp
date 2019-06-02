@@ -91,8 +91,6 @@
 						<option value="1" <c:if test="${'1' == carStatus}"> selected</c:if>>闲置中</option>	
 					</select>
 				</div>
-						
-				
 				<button type="submit" class="btn btn-default">查询</button>
 			</form>
 			<div id="tj">

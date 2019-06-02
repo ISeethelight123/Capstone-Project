@@ -37,6 +37,9 @@ public interface DriverService {
 	 * 分页司机查询(模糊查询)
 	 */
 	Page<Driver> selectDriverLikeByQueryVo(DriverQueryVo vo);
-	
+	/**
+	 * 获得司机列表
+	 */
+	List<Driver> selectDriverByQueryVo(DriverQueryVo vo);
 	
 }

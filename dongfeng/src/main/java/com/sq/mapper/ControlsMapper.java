@@ -3,6 +3,7 @@ package com.sq.mapper;
 import java.util.List;
 
 import com.sq.pojo.Controls;
+import com.sq.pojo.ControlsQueryVo;
 /**
  *  运单接口类
  * @author sunqi
@@ -13,7 +14,7 @@ public interface ControlsMapper {
 	/**
 	 * 运单增加
 	 */
-	void addControls(Controls con); 
+	Integer addControls(Controls con); 
 	/**
 	 * 运单删除
 	 */
@@ -27,9 +28,14 @@ public interface ControlsMapper {
 	 */
 	void updateControls(Controls con);
 	/**
-	 * 运单查询(全部运单)
+	 * 运单查询(分页对象)
 	 */
-	List<Controls> selectControlsAll();
+	List<Controls> selectControlsAllByControlsQueryVo(ControlsQueryVo vo);
+	/**
+	 * 运单查询(符合条件的运单数量)
+	 */
+	Integer selectControlsCountByControlsQueryVo(ControlsQueryVo vo);
+	
 	/**
 	 * 运单查询(单个运单)
 	 */
@@ -43,6 +49,9 @@ public interface ControlsMapper {
 	 */
 	//List<Controls> selectControlsLike(Controls con);
 	
-	
+	/**
+	 * 查询调度单的id最大值
+	 */
+	Integer selectMaxControlsId();
 	
 }

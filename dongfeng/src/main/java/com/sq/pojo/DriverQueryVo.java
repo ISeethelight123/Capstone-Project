@@ -8,12 +8,12 @@ public class DriverQueryVo {
 	private Integer driverId;
 	//司机手机号
 	private String driverPhone;
-	//司机状态
+	//司机状态(0:运输中,1:闲置中)
 	private String driverStatus;
 	//当前页
 	private Integer page = 1;
 	//每页数
-	private Integer size = 1;
+	private Integer size = 10;
 	//起始行
 	private Integer startRow;
 	

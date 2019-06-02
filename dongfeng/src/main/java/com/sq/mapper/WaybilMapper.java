@@ -3,6 +3,7 @@ package com.sq.mapper;
 import java.util.List;
 
 import com.sq.pojo.Waybil;
+import com.sq.pojo.WaybilQueryVo;
 
 public interface WaybilMapper {
 	
@@ -52,6 +53,20 @@ public interface WaybilMapper {
 	 * 批量生成运单
 	 */
 	void addWaybilMass(List<Waybil> list);
+	
+	/**
+	 * 查找运单号
+	 */
+	List<Waybil> selectWaybilByMany(WaybilQueryVo vo);
+	/**
+	 * 查找运单号
+	 */
+	List<Waybil> selectWaybilByWaybilId(WaybilQueryVo vo);
+	/**
+	 * 查找符合条件的订单数量
+	 */
+	Integer selectCountByWaybilId(WaybilQueryVo vo);
+	
 	
 	
 }

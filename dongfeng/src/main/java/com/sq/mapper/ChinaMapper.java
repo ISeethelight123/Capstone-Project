@@ -2,8 +2,10 @@ package com.sq.mapper;
 
 import java.util.List;
 
-import com.sq.pojo.China;
+import org.springframework.stereotype.Component;
 
+import com.sq.pojo.China;
+@Component(value="chinaMappersq")
 public interface ChinaMapper {
 
 	

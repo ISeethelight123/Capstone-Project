@@ -18,6 +18,17 @@
 		FROM
 		   wrehouse
 	</select>
+	<!-- 查询仓库地点By id -->
+	<select id="selectWrehouseById" resultMap="WrehouseMap" parameterType="java.lang.Integer">
+		SELECT
+		  Wrehouse_ID,
+		  Wrehouse_Address,
+		  Wrehouse_Name,
+		  Wrehouse_Phone
+		FROM
+		   wrehouse
+		where Wrehouse_ID = #{value} 
+	</select>
 
 
 </mapper>

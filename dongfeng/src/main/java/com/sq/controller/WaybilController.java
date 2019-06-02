@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,13 +39,13 @@ import com.sq.service.WrehouseService;
 @RequestMapping("/waybil")
 public class WaybilController {
 
-	@Autowired
+	@Resource(name="wrehouseServicesq")
 	WrehouseService wrehouseService;
-	@Autowired
+	@Resource(name="chinaServicesq")
 	ChinaService chinaService;
-	@Autowired
+	@Resource(name="allocationServicesq")
 	AllocationService allocationService;
-	@Autowired
+	@Resource(name="ordersServicesq")
 	OrdersService ordersService;
 	@Autowired
 	WaybilService waybilService;

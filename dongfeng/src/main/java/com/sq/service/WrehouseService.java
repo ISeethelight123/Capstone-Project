@@ -2,8 +2,10 @@ package com.sq.service;
 
 import java.util.List;
 
-import com.sq.pojo.Wrehouse;
+import org.springframework.stereotype.Component;
 
+import com.sq.pojo.Wrehouse;
+@Component(value="wrehouseServicesq")
 public interface WrehouseService {
 
 	/**
@@ -11,7 +13,10 @@ public interface WrehouseService {
 	 */
 	List<Wrehouse> selectWrehouse();
 	
-	
+	/**
+	 * 查询仓库地点
+	 */
+	Wrehouse selectWrehouseById(Integer wrehouseId);
 	
 	
 }

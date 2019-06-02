@@ -1,8 +1,6 @@
 package com.sq.pojo;
 
-import java.util.Date;
-
-public class Controls {
+public class ControlsQueryVo {
 
 	private Integer controlId;
 	private Integer controlCarid;
@@ -13,32 +11,32 @@ public class Controls {
 	private String controlEndtime;
 	private Integer controlWrehouseId;
 	private String controlDestination;
-	private String temp3;
 	
-	//表一对一
-	private Car car;
-	private Driver driver;
-	private Wrehouse wrehouse;
+	//当前页
+	private Integer page = 1;
+	//每页数
+	private Integer size = 10;
+	//起始行
+	private Integer startRow;
 	
 	
-	
-	public Car getCar() {
-		return car;
+	public Integer getPage() {
+		return page;
 	}
-	public void setCar(Car car) {
-		this.car = car;
+	public void setPage(Integer page) {
+		this.page = page;
 	}
-	public Driver getDriver() {
-		return driver;
+	public Integer getSize() {
+		return size;
 	}
-	public void setDriver(Driver driver) {
-		this.driver = driver;
+	public void setSize(Integer size) {
+		this.size = size;
 	}
-	public Wrehouse getWrehouse() {
-		return wrehouse;
+	public Integer getStartRow() {
+		return startRow;
 	}
-	public void setWrehouse(Wrehouse wrehouse) {
-		this.wrehouse = wrehouse;
+	public void setStartRow(Integer startRow) {
+		this.startRow = startRow;
 	}
 	public Integer getControlId() {
 		return controlId;
@@ -70,9 +68,6 @@ public class Controls {
 	public void setControlWaybilid(Integer controlWaybilid) {
 		this.controlWaybilid = controlWaybilid;
 	}
-	
-	
-	
 	public String getControlStarttime() {
 		return controlStarttime;
 	}
@@ -85,29 +80,18 @@ public class Controls {
 	public void setControlEndtime(String controlEndtime) {
 		this.controlEndtime = controlEndtime;
 	}
-	public String getTemp3() {
-		return temp3;
-	}
-	public void setTemp3(String temp3) {
-		this.temp3 = temp3;
-	}
-	
-	public String getControlDestination() {
-		return controlDestination;
-	}
-	public void setControlDestination(String controlDestination) {
-		this.controlDestination = controlDestination;
-	}
 	public Integer getControlWrehouseId() {
 		return controlWrehouseId;
 	}
 	public void setControlWrehouseId(Integer controlWrehouseId) {
 		this.controlWrehouseId = controlWrehouseId;
 	}
-	
-	
-	
-	
+	public String getControlDestination() {
+		return controlDestination;
+	}
+	public void setControlDestination(String controlDestination) {
+		this.controlDestination = controlDestination;
+	}
 	
 	
 	

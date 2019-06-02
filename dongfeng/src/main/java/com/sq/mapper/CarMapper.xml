@@ -9,7 +9,6 @@
 		<result property="carType" column="car_type" />
 		<result property="carSize" column="car_size" />
 		<result property="carStatus" column="car_status" />
-		<result property="temp3" column="temp3" />
 		<association property="loads" javaType="com.sq.pojo.CarLoad">
 			<result property="carloadId" column="carloadId" />
 			<result property="carloads" column="carloads" />
@@ -58,12 +57,23 @@
 	<update id="updateCar" parameterType="com.sq.pojo.Car">
 		UPDATE
 		  car
-		SET
-		  car_plate = #{carPlate},
-		  car_weight = #{carWeight},
-		  car_type = #{carType},
-		  car_size = #{carSize},
-		  car_status = #{carStatus}
+		<set>
+		  <if test='carPlate != null and carPlate != ""'>
+		  	  car_plate = #{carPlate},
+		  </if>
+		  <if test="carWeight != null">
+		      car_weight = #{carWeight},
+		  </if>
+		  <if test="carType != null ">
+		      car_type = #{carType},
+		  </if>
+		  <if test='carSize != null and carSize != "" '>
+		      car_size = #{carSize},
+		  </if>
+		  <if test='carStatus != null and carStatus != "" '>
+		      car_status = #{carStatus}
+		  </if>
+		</set>
 		WHERE car_id = #{carId}
 	</update>
 	
@@ -101,7 +111,10 @@
 		FROM
 		  car
 		<where>
-			<if test="carPlate != null and carPlate !=''">
+			<if test="carId != null and carId != 0">
+				and car_id = #{carId}
+			</if>
+			<if test='carPlate != null and carPlate !="" '>
 				and car_plate like "%"#{carPlate}"%"
 			</if>
 			<if test="carWeight != null">
@@ -110,14 +123,14 @@
 			<if test="carType != null">
 				and car_type = #{carType}
 			</if>
-			<if test="carStatus != null and carStatus != ''">
+			<if test='carStatus != null and carStatus != "" '>
 				and car_status = #{carStatus}
 			</if>
 		</where> 
 	</select>
 	
 	
-	<!-- 模糊查询 -->
+	<!-- 获取分页对象 -->
 	<select id="selectCarLikeByQueryVo" resultMap="CarMap" parameterType="com.sq.pojo.CarQueryVo">
 		SELECT  
 		  ca.car_id,
@@ -134,7 +147,10 @@
 			<if test="1==1">
 				ca.car_weight = cl.carload_id and ca.car_type = ct.cartype_id
 			</if>
-			<if test="carPlate != null and carPlate !=''">
+			<if test="carId != null and carId != 0">
+				and ca.car_id = #{carId}
+			</if>
+			<if test='carPlate != null and carPlate != ""'>
 				and ca.car_plate like "%"#{carPlate}"%"
 			</if>
 			<if test="carWeight != null">
@@ -143,11 +159,44 @@
 			<if test="carType != null">
 				and ca.car_type = #{carType}
 			</if>
-			<if test="carStatus != null and carStatus != ''">
+			<if test='carStatus != null and carStatus != "" '>
 				and ca.car_status = #{carStatus}
 			</if>
 		</where>
 		limit #{startRow},#{size} 
+	</select>
+	<select id="selectCarByQueryVo" resultMap="CarMap" parameterType="com.sq.pojo.CarQueryVo">
+		SELECT  
+		  ca.car_id,
+		  ca.car_plate,
+		  ca.car_weight,
+		  ca.car_type,
+		  ca.car_size,
+		  ca.car_status,
+		  cl.carloads,
+		  ct.cartypes
+		FROM 
+		  car ca,carload cl,cartype ct
+		<where>
+			<if test="1==1">
+				ca.car_weight = cl.carload_id and ca.car_type = ct.cartype_id
+			</if>
+			<if test="carId != null and carId != 0">
+				and ca.car_id = #{carId}
+			</if>
+			<if test='carPlate != null and carPlate !="" '>
+				and ca.car_plate like "%"#{carPlate}"%"
+			</if>
+			<if test="carWeight != null">
+				and ca.car_weight = #{carWeight}
+			</if>
+			<if test="carType != null">
+				and ca.car_type = #{carType}
+			</if>
+			<if test='carStatus != null and carStatus != "" '>
+				and ca.car_status = #{carStatus}
+			</if>
+		</where>
 	</select>
 	
 

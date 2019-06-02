@@ -2,7 +2,9 @@ package com.sq.service;
 
 import java.util.List;
 
+import com.sq.common.utils.Page;
 import com.sq.pojo.Waybil;
+import com.sq.pojo.WaybilQueryVo;
 
 public interface WaybilService {
 
@@ -51,7 +53,18 @@ public interface WaybilService {
 	 * 批量生成运单
 	 */
 	void addWaybilMass(List<Waybil> list);
-	
+	/**
+	 * 查找运单号(生成运单号列表)
+	 */
+	List<Waybil> selectWaybilByMany(WaybilQueryVo vo);
+	/**
+	 * 查找运单号(生成订单)
+	 */
+	Page<Waybil> selectWaybilByWaybilId(WaybilQueryVo vo);
+	/**
+	 * 查找符合条件的订单数量
+	 */
+	Integer selectCountByWaybilId(WaybilQueryVo vo);
 	
 	
 }
