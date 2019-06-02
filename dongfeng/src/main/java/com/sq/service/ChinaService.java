@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.sq.pojo.China;
-@Component(value="chinaServicesq")
+
 public interface ChinaService {
 
 	

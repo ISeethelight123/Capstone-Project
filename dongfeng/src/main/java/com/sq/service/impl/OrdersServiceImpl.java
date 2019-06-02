@@ -6,11 +6,12 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import com.sq.mapper.OrdersMapper;
 import com.sq.pojo.Orders;
 import com.sq.service.OrdersService;
-@Controller
+@Service(value="ordersServicesq")
 public class OrdersServiceImpl implements OrdersService {
 
 	@Resource(name="ordersMappersq")

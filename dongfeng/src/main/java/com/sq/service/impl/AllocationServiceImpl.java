@@ -13,8 +13,8 @@ import com.sq.pojo.Allocation;
 import com.sq.pojo.Car;
 import com.sq.pojo.OrderQueryVo;
 import com.sq.service.AllocationService;
-@Service
-public class AllocatinServiceImpl implements AllocationService {
+@Service(value="allocationServicesq")
+public class AllocationServiceImpl implements AllocationService {
 
 	@Resource(name="allocationMappersq")
 	AllocationMapper allocationMapper;

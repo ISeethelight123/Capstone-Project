@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.sq.mapper.WrehouseMapper;
 import com.sq.pojo.Wrehouse;
 import com.sq.service.WrehouseService;
-@Service
+@Service(value="wrehouseServicesq")
 public class WrehouseServiceImpl implements WrehouseService {
 
 	@Resource(name="wrehouseMappersq")

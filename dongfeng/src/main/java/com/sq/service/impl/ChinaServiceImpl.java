@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.sq.mapper.ChinaMapper;
 import com.sq.pojo.China;
 import com.sq.service.ChinaService;
-@Service
+@Service(value="chinaServicesq")
 public class ChinaServiceImpl implements ChinaService {
 	
 	@Resource(name="chinaMappersq")

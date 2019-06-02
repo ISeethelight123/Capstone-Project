@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import com.sq.common.utils.Page;
 import com.sq.pojo.Allocation;
 import com.sq.pojo.OrderQueryVo;
-@Component(value="allocationServicesq")
+
 public interface AllocationService {
 	/**
 	 * 查询分页对象
