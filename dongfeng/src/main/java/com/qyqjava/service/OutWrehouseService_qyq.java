@@ -17,8 +17,8 @@ public interface OutWrehouseService_qyq {
 	/*
 	 * 增加出库单
 	 */
-	public int addOutWrehouseInfo(Allocation allocation,String id);
-	
+	public int addOutWrehouseInfo(Allocation allocation, String id);
+
 	/*
 	 * 查询仓库货位中的所有订单及订单位置
 	 */
@@ -28,4 +28,9 @@ public interface OutWrehouseService_qyq {
 	 * 根据订单号查询仓位号
 	 */
 	public List<Allocation> showOWinfo(String id);
+	/*
+	 * 根据订单号在仓位表中修改新订单号
+	 */
+	public int udOutWreInfo(String id,String orderId);
+	
 }

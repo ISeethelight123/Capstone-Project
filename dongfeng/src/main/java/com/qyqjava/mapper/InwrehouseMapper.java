@@ -4,8 +4,7 @@ import com.qyqjava.pojo.Inwrehouse;
 import com.qyqjava.pojo.InwrehouseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
-@Component(value="inwrehouseQYQ")
+
 public interface InwrehouseMapper {
     int countByExample(InwrehouseExample example);
 

@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.alibaba.fastjson.JSON;
 import com.qyqjava.mapper.AllocationMapper;
 import com.qyqjava.pojo.Inwrehouse;
 import com.qyqjava.pojo.Outwerhouse;
@@ -28,7 +27,7 @@ public class ConnecTion {
 	private InwrehouseService inwrehouseService;
 	@Autowired
 	private OutWrehouseService_qyq outwrehosueService;
-	@Resource(name = "allocationQYQ")
+	@Autowired
 	private AllocationMapper allocationMapper;
 
 	@RequestMapping("/gomain")
@@ -89,6 +88,13 @@ public class ConnecTion {
 			listy.add(object);
 		}
 		
+		//查询仓库的坐标
+		List<Map<String,Object>> showXY = WrehouseService.showXY();
+
+		String string = JSON.toJSONString(showXY);
+		System.out.println("String"+string);
+		
+		model.addAttribute("string", string);
 		model.addAttribute("listx", listx);
 		model.addAttribute("listy", listy);
 		return "WrePerent";

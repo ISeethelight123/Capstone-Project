@@ -127,4 +127,13 @@ public class OutWrehouseControler_qyq {
 		int i = outWrehouse.addOutWrehouseInfo(allocation2, wrehouseId);
 		return i;
 	}
+	/*
+	 * 修改出库单中的订单号
+	 */
+	@RequestMapping("udoutWreInfo")
+	public int udoutWreInfo(String id,String orderId) {
+		int i = outWrehouse.udOutWreInfo(id, orderId);
+		System.out.println(i);
+		return i;
+	}
 }

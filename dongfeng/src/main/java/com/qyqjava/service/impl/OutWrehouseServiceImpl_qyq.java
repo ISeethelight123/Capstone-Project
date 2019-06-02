@@ -3,8 +3,7 @@ package com.qyqjava.service.impl;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,11 +22,11 @@ import com.qyqjava.service.OutWrehouseService_qyq;
 @Service
 @Transactional
 public class OutWrehouseServiceImpl_qyq implements OutWrehouseService_qyq {
-	@Resource(name = "outwerhosueQYQ")
+	@Autowired
 	private OutwerhouseMapper outwerhouseMapper;
-	@Resource(name = "allocationQYQ")
+	@Autowired
 	private AllocationMapper allocationMapper;
-	@Resource(name = "orderSQYQ")
+	@Autowired
 	private OrdersMapper ordersMapper;
 
 	/*
@@ -80,7 +79,7 @@ public class OutWrehouseServiceImpl_qyq implements OutWrehouseService_qyq {
 		Integer allocationId = allocation.getAllocationId();
 		// 仓库号
 		Integer wrehouseId = allocation.getWrehouseId();
-		System.out.println("添加出库单"+allocation);
+		System.out.println("添加出库单" + allocation);
 		// 1.格据货位号为条件
 		AllocationExample allocationExample = new AllocationExample();
 		com.qyqjava.pojo.AllocationExample.Criteria AllCriteria = allocationExample.createCriteria();
@@ -128,6 +127,26 @@ public class OutWrehouseServiceImpl_qyq implements OutWrehouseService_qyq {
 		List<Allocation> list = allocationMapper.selectByExample(example);
 		System.out.println(list);
 		return list;
+	}
+
+	/*
+	 * 3 (non-Javadoc)修改订单号
+	 * 
+	 * @see
+	 * com.qyqjava.service.OutWrehouseService_qyq#udOutWreInfo(java.lang.String,
+	 * java.lang.String)
+	 */
+	public int udOutWreInfo(String id, String orderId) {
+		// 条件
+		OutwerhouseExample example = new OutwerhouseExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andOrderIdEqualTo(Integer.parseInt(id));
+
+		Outwerhouse outwerhouse = new Outwerhouse();
+		outwerhouse.setOrderId(Integer.parseInt(orderId));
+
+		int i = outwerhouseMapper.updateByExampleSelective(outwerhouse, example);
+		return i;
 	}
 
 }

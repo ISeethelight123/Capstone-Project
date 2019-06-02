@@ -13,7 +13,7 @@ import com.qyqjava.pojo.Wrehouse;
 
 public interface WrehouseService_qyq {
 	/*
-	 * 显示仓库的信息
+	 * 显示仓库的信息(视图)
 	 */
 	public List<Map<String, Object>> showWrehouseInfo();
 
@@ -31,13 +31,19 @@ public interface WrehouseService_qyq {
 	 * 删除仓库
 	 */
 	public int deleteWrehouse(String id);
+
 	/*
 	 * 查询仓库的订单量(按仓库分类)
 	 */
 	public List<Object> showOrdersPen();
+
 	/*
 	 * 查询仓库的信息（wrehouse)
 	 */
 	public List<Wrehouse> showWre();
 
+	/**
+	 * 查询仓库的坐标
+	 */
+	public List<Map<String, Object>> showXY();
 }

@@ -4,13 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qyqjava.mapper.AllocationMapper;
+import com.qyqjava.mapper.CoordinateMapper;
 import com.qyqjava.mapper.RelationMapper;
 import com.qyqjava.mapper.WrehouseMapper;
 import com.qyqjava.pojo.Relation;
@@ -20,12 +19,14 @@ import com.qyqjava.service.WrehouseService_qyq;
 @Service
 @Transactional
 public class WrehouseServiceImpl_qyq implements WrehouseService_qyq {
-	@Resource(name = "wrehouseQYQ")
+	@Autowired
 	private WrehouseMapper wrehouseMapper;
-	@Resource(name = "relationQYQ")
+	@Autowired
 	private RelationMapper relationMapper;
-	@Resource(name = "allocationQYQ")
+	@Autowired
 	private AllocationMapper allocationMapper;
+	@Autowired
+	private CoordinateMapper coordinateMapper;
 
 	/*
 	 * 显示仓库的信息
@@ -127,5 +128,15 @@ public class WrehouseServiceImpl_qyq implements WrehouseService_qyq {
 	public List<Wrehouse> showWre() {
 		List<Wrehouse> list = wrehouseMapper.selectByExample(null);
 		return list;
+	}
+
+	/*
+	 * (non-Javadoc)查询仓库的坐标
+	 * @see com.qyqjava.service.WrehouseService_qyq#showXY()
+	 */
+	public List<Map<String, Object>> showXY() {
+		List<Map<String,Object>> showXY = coordinateMapper.showXY();
+		System.out.println("showXY"+showXY);
+		return showXY;
 	}
 }

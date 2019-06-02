@@ -2,8 +2,7 @@ package com.qyqjava.service.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,9 +18,9 @@ import com.qyqjava.service.InwrehouseService;
 @Service
 @Transactional
 public class InWrehouseServiceImpl_qyq implements InwrehouseService {
-	@Resource(name = "inwrehouseQYQ")
+	@Autowired
 	private InwrehouseMapper inwrehouseMapper;
-	@Resource(name = "relationQYQ")
+	@Autowired
 	private RelationMapper relationMapper;
 
 	/*
